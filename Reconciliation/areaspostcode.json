@@ -1,0 +1,374 @@
+[
+  {
+    "op": "core/recon",
+    "description": "Reconcile cells in column postcode to type http://data.ordnancesurvey.co.uk/ontology/postcode/PostcodeUnit",
+    "columnName": "postcode",
+    "config": {
+      "mode": "standard-service",
+      "service": "http://data.ordnancesurvey.co.uk/datasets/code-point-open/apis/reconciliation",
+      "identifierSpace": "http://data.ordnancesurvey.co.uk/id/data/code-point-open",
+      "schemaSpace": "http://data.ordnancesurvey.co.uk/id/data/code-point-open",
+      "type": {
+        "id": "http://data.ordnancesurvey.co.uk/ontology/postcode/PostcodeUnit",
+        "name": "http://data.ordnancesurvey.co.uk/ontology/postcode/PostcodeUnit"
+      },
+      "autoMatch": true,
+      "columnDetails": []
+    },
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    }
+  },
+  {
+    "op": "core/recon",
+    "description": "Reconcile cells in column AreaName to type http://data.ordnancesurvey.co.uk/ontology/50kGazetteer/NamedPlace",
+    "columnName": "AreaName",
+    "config": {
+      "mode": "standard-service",
+      "service": "http://data.ordnancesurvey.co.uk/datasets/50k-gazetteer/apis/reconciliation",
+      "identifierSpace": "http://data.ordnancesurvey.co.uk/id/data/50k-gazetteer",
+      "schemaSpace": "http://data.ordnancesurvey.co.uk/id/data/50k-gazetteer",
+      "type": {
+        "id": "http://data.ordnancesurvey.co.uk/ontology/50kGazetteer/NamedPlace",
+        "name": "http://data.ordnancesurvey.co.uk/ontology/50kGazetteer/NamedPlace"
+      },
+      "autoMatch": true,
+      "columnDetails": []
+    },
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    }
+  },
+  {
+    "op": "core/recon",
+    "description": "Reconcile cells in column Ward to type http://data.ordnancesurvey.co.uk/ontology/admingeo/MetropolitanDistrictWard",
+    "columnName": "Ward",
+    "config": {
+      "mode": "standard-service",
+      "service": "http://data.ordnancesurvey.co.uk/datasets/boundary-line/apis/reconciliation",
+      "identifierSpace": "http://data.ordnancesurvey.co.uk/id/data/boundary-line",
+      "schemaSpace": "http://data.ordnancesurvey.co.uk/id/data/boundary-line",
+      "type": {
+        "id": "http://data.ordnancesurvey.co.uk/ontology/admingeo/MetropolitanDistrictWard",
+        "name": "http://data.ordnancesurvey.co.uk/ontology/admingeo/MetropolitanDistrictWard"
+      },
+      "autoMatch": true,
+      "columnDetails": []
+    },
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    }
+  },
+  {
+    "op": "core/recon",
+    "description": "Reconcile cells in column Local Authority to type http://data.ordnancesurvey.co.uk/ontology/admingeo/MetropolitanDistrict",
+    "columnName": "Local Authority",
+    "config": {
+      "mode": "standard-service",
+      "service": "http://data.ordnancesurvey.co.uk/datasets/boundary-line/apis/reconciliation",
+      "identifierSpace": "http://data.ordnancesurvey.co.uk/id/data/boundary-line",
+      "schemaSpace": "http://data.ordnancesurvey.co.uk/id/data/boundary-line",
+      "type": {
+        "id": "http://data.ordnancesurvey.co.uk/ontology/admingeo/MetropolitanDistrict",
+        "name": "http://data.ordnancesurvey.co.uk/ontology/admingeo/MetropolitanDistrict"
+      },
+      "autoMatch": true,
+      "columnDetails": []
+    },
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    }
+  },
+  {
+    "op": "rdf-extension/save-rdf-schema",
+    "description": "Save RDF schema skeleton",
+    "schema": {
+      "baseUri": "http://data.gmdsp.org.uk/id/localauthorityname/thing/",
+      "prefixes": [
+        {
+          "name": "rdfs",
+          "uri": "http://www.w3.org/2000/01/rdf-schema#"
+        },
+        {
+          "name": "foaf",
+          "uri": "http://xmlns.com/foaf/0.1/"
+        },
+        {
+          "name": "owl",
+          "uri": "http://www.w3.org/2002/07/owl#"
+        },
+        {
+          "name": "xsd",
+          "uri": "http://www.w3.org/2001/XMLSchema#"
+        },
+        {
+          "name": "rdf",
+          "uri": "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+        },
+        {
+          "name": "postcode",
+          "uri": "http://data.ordnancesurvey.co.uk/ontology/postcode/"
+        },
+        {
+          "name": "locn",
+          "uri": "http://www.w3.org/ns/locn#"
+        }
+      ],
+      "rootNodes": [
+        {
+          "nodeType": "cell-as-resource",
+          "expression": "value",
+          "isRowNumberCell": true,
+          "rdfTypes": [
+            {
+              "uri": "http://www.w3.org/ns/locn#Address",
+              "curie": "locn:Address"
+            }
+          ],
+          "links": [
+            {
+              "uri": "http://www.w3.org/ns/locn#adminUnitL2",
+              "curie": "locn:adminUnitL2",
+              "target": {
+                "nodeType": "cell-as-resource",
+                "expression": "cell.recon.match.id",
+                "isRowNumberCell": false,
+                "columnName": "Local Authority",
+                "rdfTypes": [],
+                "links": [
+                  {
+                    "uri": "http://www.w3.org/2000/01/rdf-schema#label",
+                    "curie": "rdfs:label",
+                    "target": {
+                      "nodeType": "cell-as-literal",
+                      "expression": "value",
+                      "isRowNumberCell": false,
+                      "columnName": "Local Authority"
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "uri": "http://data.ordnancesurvey.co.uk/ontology/postcode/ward",
+              "curie": "postcode:ward",
+              "target": {
+                "nodeType": "cell-as-resource",
+                "expression": "cell.recon.match.id",
+                "isRowNumberCell": false,
+                "columnName": "Ward",
+                "rdfTypes": [],
+                "links": [
+                  {
+                    "uri": "http://www.w3.org/2000/01/rdf-schema#label",
+                    "curie": "rdfs:label",
+                    "target": {
+                      "nodeType": "cell-as-literal",
+                      "expression": "value",
+                      "isRowNumberCell": false,
+                      "columnName": "Ward"
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "uri": "http://www.w3.org/ns/locn#addressArea",
+              "curie": "locn:addressArea",
+              "target": {
+                "nodeType": "cell-as-resource",
+                "expression": "cell.recon.match.id",
+                "isRowNumberCell": false,
+                "columnName": "AreaName",
+                "rdfTypes": [],
+                "links": [
+                  {
+                    "uri": "http://www.w3.org/2000/01/rdf-schema#label",
+                    "curie": "rdfs:label",
+                    "target": {
+                      "nodeType": "cell-as-literal",
+                      "expression": "value",
+                      "isRowNumberCell": false,
+                      "columnName": "AreaName"
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "uri": "http://www.w3.org/ns/locn#postCode",
+              "curie": "locn:postCode",
+              "target": {
+                "nodeType": "cell-as-resource",
+                "expression": "cell.recon.match.id",
+                "isRowNumberCell": false,
+                "columnName": "postcode",
+                "rdfTypes": [],
+                "links": [
+                  {
+                    "uri": "http://www.w3.org/2000/01/rdf-schema#label",
+                    "curie": "rdfs:label",
+                    "target": {
+                      "nodeType": "cell-as-literal",
+                      "expression": "value",
+                      "isRowNumberCell": false,
+                      "columnName": "postcode"
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "op": "rdf-extension/save-rdf-schema",
+    "description": "Save RDF schema skeleton",
+    "schema": {
+      "baseUri": "http://data.gmdsp.org.uk/id/localauthorityname/thing/",
+      "prefixes": [
+        {
+          "name": "rdfs",
+          "uri": "http://www.w3.org/2000/01/rdf-schema#"
+        },
+        {
+          "name": "foaf",
+          "uri": "http://xmlns.com/foaf/0.1/"
+        },
+        {
+          "name": "owl",
+          "uri": "http://www.w3.org/2002/07/owl#"
+        },
+        {
+          "name": "xsd",
+          "uri": "http://www.w3.org/2001/XMLSchema#"
+        },
+        {
+          "name": "rdf",
+          "uri": "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+        },
+        {
+          "name": "postcode",
+          "uri": "http://data.ordnancesurvey.co.uk/ontology/postcode/"
+        },
+        {
+          "name": "locn",
+          "uri": "http://www.w3.org/ns/locn#"
+        }
+      ],
+      "rootNodes": [
+        {
+          "nodeType": "cell-as-resource",
+          "expression": "value",
+          "isRowNumberCell": true,
+          "rdfTypes": [
+            {
+              "uri": "http://www.w3.org/ns/locn#Address",
+              "curie": "locn:Address"
+            }
+          ],
+          "links": [
+            {
+              "uri": "http://www.w3.org/ns/locn#adminUnitL2",
+              "curie": "locn:adminUnitL2",
+              "target": {
+                "nodeType": "cell-as-resource",
+                "expression": "cell.recon.match.id",
+                "isRowNumberCell": false,
+                "columnName": "Local Authority",
+                "rdfTypes": [],
+                "links": [
+                  {
+                    "uri": "http://www.w3.org/2000/01/rdf-schema#label",
+                    "curie": "rdfs:label",
+                    "target": {
+                      "nodeType": "cell-as-literal",
+                      "expression": "value",
+                      "isRowNumberCell": false,
+                      "columnName": "Local Authority"
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "uri": "http://data.ordnancesurvey.co.uk/ontology/postcode/ward",
+              "curie": "postcode:ward",
+              "target": {
+                "nodeType": "cell-as-resource",
+                "expression": "cell.recon.match.id",
+                "isRowNumberCell": false,
+                "columnName": "Ward",
+                "rdfTypes": [],
+                "links": [
+                  {
+                    "uri": "http://www.w3.org/2000/01/rdf-schema#label",
+                    "curie": "rdfs:label",
+                    "target": {
+                      "nodeType": "cell-as-literal",
+                      "expression": "value",
+                      "isRowNumberCell": false,
+                      "columnName": "Ward"
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "uri": "http://www.w3.org/ns/locn#addressArea",
+              "curie": "locn:addressArea",
+              "target": {
+                "nodeType": "cell-as-resource",
+                "expression": "cell.recon.match.id",
+                "isRowNumberCell": false,
+                "columnName": "AreaName",
+                "rdfTypes": [],
+                "links": [
+                  {
+                    "uri": "http://www.w3.org/2000/01/rdf-schema#label",
+                    "curie": "rdfs:label",
+                    "target": {
+                      "nodeType": "cell-as-literal",
+                      "expression": "value",
+                      "isRowNumberCell": false,
+                      "columnName": "AreaName"
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "uri": "http://www.w3.org/ns/locn#postCode",
+              "curie": "locn:postCode",
+              "target": {
+                "nodeType": "cell-as-resource",
+                "expression": "cell.recon.match.id",
+                "isRowNumberCell": false,
+                "columnName": "postcode",
+                "rdfTypes": [],
+                "links": [
+                  {
+                    "uri": "http://www.w3.org/2000/01/rdf-schema#label",
+                    "curie": "rdfs:label",
+                    "target": {
+                      "nodeType": "cell-as-literal",
+                      "expression": "value",
+                      "isRowNumberCell": false,
+                      "columnName": "postcode"
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  }
+]

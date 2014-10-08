@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF
+	xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+	xmlns:foaf="http://xmlns.com/foaf/0.1/"
+	xmlns:owl="http://www.w3.org/2002/07/owl#"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+	xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+	xmlns:postcode="http://data.ordnancesurvey.co.uk/ontology/postcode/"
+	xmlns:locn="http://www.w3.org/ns/locn#">
+
+<rdf:Description rdf:about="http://data.gmdsp.org.uk/id/localauthorityname/thing/0">
+	<rdf:type rdf:resource="http://www.w3.org/ns/locn#Address"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.ordnancesurvey.co.uk/id/7000000000018757">
+	<rdfs:label>Stockport</rdfs:label>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.gmdsp.org.uk/id/localauthorityname/thing/0">
+	<locn:adminUnitL2 rdf:resource="http://data.ordnancesurvey.co.uk/id/7000000000018757"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.ordnancesurvey.co.uk/id/7000000000018697">
+	<rdfs:label>Bredbury Green and Romiley</rdfs:label>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.gmdsp.org.uk/id/localauthorityname/thing/0">
+	<postcode:ward rdf:resource="http://data.ordnancesurvey.co.uk/id/7000000000018697"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.ordnancesurvey.co.uk/id/50kGazetteer/202089">
+	<rdfs:label>Romiley</rdfs:label>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.gmdsp.org.uk/id/localauthorityname/thing/0">
+	<locn:addressArea rdf:resource="http://data.ordnancesurvey.co.uk/id/50kGazetteer/202089"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.ordnancesurvey.co.uk/id/postcodeunit/SK64DN">
+	<rdfs:label>SK6 4DN</rdfs:label>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.gmdsp.org.uk/id/localauthorityname/thing/0">
+	<locn:postCode rdf:resource="http://data.ordnancesurvey.co.uk/id/postcodeunit/SK64DN"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.gmdsp.org.uk/id/localauthorityname/thing/1">
+	<rdf:type rdf:resource="http://www.w3.org/ns/locn#Address"/>
+	<locn:adminUnitL2 rdf:resource="http://data.ordnancesurvey.co.uk/id/7000000000018757"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.ordnancesurvey.co.uk/id/7000000000042528">
+	<rdfs:label>Reddish South</rdfs:label>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.gmdsp.org.uk/id/localauthorityname/thing/1">
+	<postcode:ward rdf:resource="http://data.ordnancesurvey.co.uk/id/7000000000042528"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.ordnancesurvey.co.uk/id/50kGazetteer/112643">
+	<rdfs:label>Heaton Norris</rdfs:label>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.gmdsp.org.uk/id/localauthorityname/thing/1">
+	<locn:addressArea rdf:resource="http://data.ordnancesurvey.co.uk/id/50kGazetteer/112643"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.ordnancesurvey.co.uk/id/postcodeunit/SK41PX">
+	<rdfs:label>SK4 1PX</rdfs:label>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.gmdsp.org.uk/id/localauthorityname/thing/1">
+	<locn:postCode rdf:resource="http://data.ordnancesurvey.co.uk/id/postcodeunit/SK41PX"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.gmdsp.org.uk/id/localauthorityname/thing/2">
+	<rdf:type rdf:resource="http://www.w3.org/ns/locn#Address"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.ordnancesurvey.co.uk/id/7000000000018786">
+	<rdfs:label>Trafford</rdfs:label>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.gmdsp.org.uk/id/localauthorityname/thing/2">
+	<locn:adminUnitL2 rdf:resource="http://data.ordnancesurvey.co.uk/id/7000000000018786"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.ordnancesurvey.co.uk/id/7000000000018801">
+	<rdfs:label>Gorse Hill</rdfs:label>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.gmdsp.org.uk/id/localauthorityname/thing/2">
+	<postcode:ward rdf:resource="http://data.ordnancesurvey.co.uk/id/7000000000018801"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.ordnancesurvey.co.uk/id/50kGazetteer/179712">
+	<rdfs:label>Old Trafford</rdfs:label>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.gmdsp.org.uk/id/localauthorityname/thing/2">
+	<locn:addressArea rdf:resource="http://data.ordnancesurvey.co.uk/id/50kGazetteer/179712"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.ordnancesurvey.co.uk/id/postcodeunit/M320TH">
+	<rdfs:label>M32 0TH</rdfs:label>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.gmdsp.org.uk/id/localauthorityname/thing/2">
+	<locn:postCode rdf:resource="http://data.ordnancesurvey.co.uk/id/postcodeunit/M320TH"/>
+</rdf:Description>
+
+</rdf:RDF>

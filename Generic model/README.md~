@@ -3,11 +3,13 @@ Example Place / Thing model
 
 Status: testing 
 ---------------
+
 Last test: 8th October
 
 Overview
 --------
-A generic Refine project to model things that have a place.
+
+This is a first attempt to create a generic Refine project
 
 Use case
 --------
@@ -35,8 +37,3 @@ The package consists of:
 - Example Open Refine project 
 - JSON file for the RDF Skeleton (which can be applied to other datasets)
 - Example output RDF file
-
-Issues / 2do
-------------
-
-- Evaluate modelling
