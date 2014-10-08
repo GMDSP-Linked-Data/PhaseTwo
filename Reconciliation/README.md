@@ -60,7 +60,7 @@ The following are useful sources of information:
 Issues / 2do
 ------------
 
-- LSOA reconciliation
+- LSOA reconciliation (via ONS service at http://statistics.data.gov.uk/ ?)
 - Place names such as "Stockport Town Centre" will not match
 
 
