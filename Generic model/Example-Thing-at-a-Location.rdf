@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF
+	xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+	xmlns:gmdsp="http://data.gmdsp.org.uk/def/council/thing/"
+	xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#"
+	xmlns:foaf="http://xmlns.com/foaf/0.1/"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+	xmlns:owl="http://www.w3.org/2002/07/owl#"
+	xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+	xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+	xmlns:locn="http://www.w3.org/ns/locn#"
+	xmlns:dcterms="http://purl.org/dc/terms/">
+
+<rdf:Description rdf:about="http://data.gmdsp.org.uk/id/localauthorityname/thing/1234">
+	<rdf:type rdf:resource="http://data.gmdsp.org.uk/def/council/thing/Thing"/>
+	<rdfs:label>Example Site</rdfs:label>
+	<rdfs:comment>Example Description</rdfs:comment>
+	<skos:notation>1234-ABC</skos:notation>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.gmdsp.org.uk/id/localauthorityname/thing/location/1234">
+	<rdfs:label>Location of Thing: 1234</rdfs:label>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.gmdsp.org.uk/id/localauthorityname/thing/1234">
+	<locn:location rdf:resource="http://data.gmdsp.org.uk/id/localauthorityname/thing/location/1234"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.gmdsp.org.uk/id/localauthorityname/thing/address/1234">
+	<rdfs:label>Address of Thing: 1234</rdfs:label>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.gmdsp.org.uk/id/localauthorityname/thing/1234">
+	<locn:addressId rdf:resource="http://data.gmdsp.org.uk/id/localauthorityname/thing/address/1234"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.gmdsp.org.uk/id/localauthorityname/thing/geometry/1234">
+	<rdfs:label>Geometry of Thing: 1234</rdfs:label>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.gmdsp.org.uk/id/localauthorityname/thing/1234">
+	<locn:geometry rdf:resource="http://data.gmdsp.org.uk/id/localauthorityname/thing/geometry/1234"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.gmdsp.org.uk/id/localauthorityname/thing/location/1234">
+	<rdf:type rdf:resource="http://purl.org/dc/terms/Location"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.gmdsp.org.uk/id/localauthorityname/thing/address/1234">
+	<rdf:type rdf:resource="http://www.w3.org/ns/locn#Address"/>
+	<locn:address>Address 1</locn:address>
+	<locn:fullAddress>Address 1</locn:fullAddress>
+	<locn:thoroughfare>Street</locn:thoroughfare>
+	<locn:addressArea>Locality</locn:addressArea>
+	<locn:postName>Town</locn:postName>
+	<locn:postCode>EG1 1EG</locn:postCode>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.gmdsp.org.uk/id/localauthorityname/thing/geometry/1234">
+	<rdf:type rdf:resource="http://www.w3.org/ns/locn#Geometry"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.gmdsp.org.uk/id/localauthorityname/thing/geometry/point/1234">
+	<rdf:type rdf:resource="http://www.w3.org/2003/01/geo/wgs84_pos#Point"/>
+	<geo:lat>10.00001</geo:lat>
+	<geo:long>3</geo:long>
+	<rdfs:label>Geometry points of Thing: 1234</rdfs:label>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.gmdsp.org.uk/id/localauthorityname/thing/geometry/1234">
+	<locn:geometry rdf:resource="http://data.gmdsp.org.uk/id/localauthorityname/thing/geometry/point/1234"/>
+</rdf:Description>
+
+</rdf:RDF>
