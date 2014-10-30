@@ -3,7 +3,7 @@ Example Place / Thing model
 
 Status: testing 
 ---------------
-Last test: 24th October
+Last update: 30th October
 
 Overview
 --------
