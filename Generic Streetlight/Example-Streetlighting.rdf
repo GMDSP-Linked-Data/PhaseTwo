@@ -11,8 +11,8 @@
 	xmlns:skos="http://www.w3.org/2004/02/skos/core#"
 	xmlns:dcterms="http://purl.org/dc/terms/">
 
-<rdf:Description rdf:about="http://data.gmdsp.org.uk/id/localauthorityname/thing/1234">
-	<rdf:type rdf:resource="http://data.gmdsp.org.uk/id/localauthorityname/thing/http%3A%2F%2Fdata.gmdsp.org.uk%2Fdef%2Fcouncil%2Fstreetlighting%2F%09Streetlight"/>
+<rdf:Description rdf:about="http://data.gmdsp.org.uk/id/localauthorityname/streetlighting/1234">
+	<rdf:type rdf:resource="http://data.gmdsp.org.uk/id/localauthorityname/streetlighting/http%3A%2F%2Fdata.gmdsp.org.uk%2Fdef%2Fcouncil%2Fstreetlighting%2F%09Streetlight"/>
 	<rdfs:label>Example Site</rdfs:label>
 	<rdfs:comment>Example Description</rdfs:comment>
 	<skos:notation>1234-ABC</skos:notation>
@@ -52,12 +52,12 @@
 	<locn:geometry rdf:resource="http://data.gmdsp.org.uk/id/localauthorityname/streetlighting/geometry/1234"/>
 </rdf:Description>
 
-<rdf:Description rdf:about="http://data.gmdsp.org.uk/id/localauthorityname/thing/1234">
+<rdf:Description rdf:about="http://data.gmdsp.org.uk/id/localauthorityname/streetlighting/1234">
 	<locn:location rdf:resource="http://data.gmdsp.org.uk/id/localauthorityname/streetlighting/location/1234"/>
-	<wattage xmlns="http://data.gmdsp.org.uk/id/localauthorityname/thing/http%3A%2F%2Fdata.gmdsp.org.uk%2Fdef%2Fcouncil%2Fstreetlighting%2F%09" rdf:datatype="http://www.w3.org/2001/XMLSchema#double">70.002</wattage>
-	<lampType xmlns="http://data.gmdsp.org.uk/id/localauthorityname/thing/http%3A%2F%2Fdata.gmdsp.org.uk%2Fdef%2Fcouncil%2Fstreetlighting%2F%09">70SONTA</lampType>
-	<columnHeight xmlns="http://data.gmdsp.org.uk/id/localauthorityname/thing/http%3A%2F%2Fdata.gmdsp.org.uk%2Fdef%2Fcouncil%2Fstreetlighting%2F%09" rdf:datatype="http://www.w3.org/2001/XMLSchema#int">6</columnHeight>
-	<manufacturer xmlns="http://data.gmdsp.org.uk/id/localauthorityname/thing/http%3A%2F%2Fdata.gmdsp.org.uk%2Fdef%2Fcouncil%2Fstreetlighting%2F%09">Smiths</manufacturer>
+	<wattage xmlns="http://data.gmdsp.org.uk/id/localauthorityname/streetlighting/http%3A%2F%2Fdata.gmdsp.org.uk%2Fdef%2Fcouncil%2Fstreetlighting%2F%09" rdf:datatype="http://www.w3.org/2001/XMLSchema#double">70.002</wattage>
+	<lampType xmlns="http://data.gmdsp.org.uk/id/localauthorityname/streetlighting/http%3A%2F%2Fdata.gmdsp.org.uk%2Fdef%2Fcouncil%2Fstreetlighting%2F%09">70SONTA</lampType>
+	<columnHeight xmlns="http://data.gmdsp.org.uk/id/localauthorityname/streetlighting/http%3A%2F%2Fdata.gmdsp.org.uk%2Fdef%2Fcouncil%2Fstreetlighting%2F%09" rdf:datatype="http://www.w3.org/2001/XMLSchema#int">6</columnHeight>
+	<manufacturer xmlns="http://data.gmdsp.org.uk/id/localauthorityname/streetlighting/http%3A%2F%2Fdata.gmdsp.org.uk%2Fdef%2Fcouncil%2Fstreetlighting%2F%09">Smiths</manufacturer>
 </rdf:Description>
 
 </rdf:RDF>
