@@ -1,0 +1,2 @@
+ID,SiteName,Description,Easting,Northing,Latitude,Longitude,Address 1,Street,Locality,Town,Postcode,Reference,Height,Wattage,Manufacturer,Type
+1234,Example Site,Example Description,111111.1,222222.2,10.00001,-2.0865,Address 1,Street,Locality,Town,EG1 1EG,1234-ABC,6,70.002,Smiths,70SONTA
