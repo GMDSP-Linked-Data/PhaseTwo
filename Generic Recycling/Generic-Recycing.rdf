@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF
+	xmlns:con="http://www.w3.org/2000/10/swap/pim/contact#"
+	xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#"
+	xmlns:oo="http://purl.org/openorg/"
+	xmlns:org="http://www.w3.org/ns/org#"
+	xmlns:locn="http://www.w3.org/ns/locn#"
+	xmlns:vcard="http://www.w3.org/2006/vcard/ns#"
+	xmlns:dcterms="http://purl.org/dc/terms/"
+	xmlns:schema="http://schema.org/"
+	xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+	xmlns:gmdsp="http://data.gmdsp.org.uk/def/council/recycling/"
+	xmlns:osspr="http://data.ordnancesurvey.co.uk/ontology/spatialrelations/"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+	xmlns:owl="http://www.w3.org/2002/07/owl#"
+	xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+	xmlns:skos="http://www.w3.org/2004/02/skos/core#">
+
+<rdf:Description rdf:about="http://data.gmdsp.org.uk/id/localauthorityname/recycling/rec-1">
+	<rdf:type rdf:resource="http://data.gmdsp.org.uk/def/council/recycling/RecyclingSite"/>
+	<rdfs:label>Supermarket Recycling Facility</rdfs:label>
+	<rdfs:comment>Supermarket Recycling Facility</rdfs:comment>
+	<skos:notation>REC-1</skos:notation>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.gmdsp.org.uk/id/localauthorityname/recycling/location/rec-1">
+	<rdf:type rdf:resource="http://purl.org/dc/terms/Location"/>
+	<rdfs:label>Location of Recycling Site: REC-1</rdfs:label>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.gmdsp.org.uk/id/localauthorityname/recycling/address/rec-1">
+	<rdf:type rdf:resource="http://www.w3.org/ns/locn#Address"/>
+	<rdfs:label>Address of Thing: Supermarket Recycling Facility</rdfs:label>
+	<locn:fullAddress>Supermarket Recycling Facility, Example Street, Example Town, M1 1AA</locn:fullAddress>
+	<locn:postName>Example Town</locn:postName>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.gmdsp.org.uk/id/localauthorityname/recycling/location/rec-1">
+	<locn:address rdf:resource="http://data.gmdsp.org.uk/id/localauthorityname/recycling/address/rec-1"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.gmdsp.org.uk/id/localauthorityname/recycling/geometry/rec-1">
+	<rdf:type rdf:resource="http://www.w3.org/ns/locn#Geometry"/>
+	<rdf:type rdf:resource="http://www.w3.org/2003/01/geo/wgs84_pos#Point"/>
+	<rdfs:label>Geometry points of Thing: Supermarket Recycling Facility</rdfs:label>
+	<geo:lat rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">53.3839</geo:lat>
+	<geo:long rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">-2.3508</geo:long>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.gmdsp.org.uk/id/localauthorityname/recycling/location/rec-1">
+	<locn:geometry rdf:resource="http://data.gmdsp.org.uk/id/localauthorityname/recycling/geometry/rec-1"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.gmdsp.org.uk/id/localauthorityname/recycling/rec-1">
+	<locn:location rdf:resource="http://data.gmdsp.org.uk/id/localauthorityname/recycling/location/rec-1"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.gmdsp.org.uk/id/localauthorityname/recycling/contact/rec-1">
+	<rdf:type rdf:resource="http://www.w3.org/2006/vcard/ns#Contact"/>
+	<rdfs:label>Contact details for Recycling Site: Supermarket Recycling Facility</rdfs:label>
+	<con:phone>0161 111 1111</con:phone>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.gmdsp.org.uk/id/localauthorityname/recycling/rec-1">
+	<oo:contact rdf:resource="http://data.gmdsp.org.uk/id/localauthorityname/recycling/contact/rec-1"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.gmdsp.org.uk/def/council/recycling/recycling-type/paper">
+	<rdf:type rdf:resource="http://data.gmdsp.org.uk/def/council/recycling/recycling-type"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.gmdsp.org.uk/id/localauthorityname/recycling/rec-1">
+	<gmdsp:hasFacility rdf:resource="http://data.gmdsp.org.uk/def/council/recycling/recycling-type/paper"/>
+	<gmdsp:recyclingType rdf:resource="http://data.gmdsp.org.uk/def/council/recycling/recycling-type/dry"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.gmdsp.org.uk/id/localauthorityname/recycling/rec-2">
+	<rdf:type rdf:resource="http://data.gmdsp.org.uk/def/council/recycling/RecyclingSite"/>
+	<rdfs:label>Example Road Household Waste and Recycling Centre</rdfs:label>
+	<rdfs:comment>Example Road Household Waste and Recycling Centre</rdfs:comment>
+	<skos:notation>REC-2</skos:notation>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.gmdsp.org.uk/id/localauthorityname/recycling/location/rec-2">
+	<rdf:type rdf:resource="http://purl.org/dc/terms/Location"/>
+	<rdfs:label>Location of Recycling Site: REC-2</rdfs:label>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.gmdsp.org.uk/id/localauthorityname/recycling/address/rec-2">
+	<rdf:type rdf:resource="http://www.w3.org/ns/locn#Address"/>
+	<rdfs:label>Address of Thing: Example Road Household Waste and Recycling Centre</rdfs:label>
+	<locn:fullAddress>Example Road Household Waste and Recycling Centre, Example Road, Example Town, M2 2AA</locn:fullAddress>
+	<locn:postName>Example Town</locn:postName>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.gmdsp.org.uk/id/localauthorityname/recycling/location/rec-2">
+	<locn:address rdf:resource="http://data.gmdsp.org.uk/id/localauthorityname/recycling/address/rec-2"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.gmdsp.org.uk/id/localauthorityname/recycling/geometry/rec-2">
+	<rdf:type rdf:resource="http://www.w3.org/ns/locn#Geometry"/>
+	<rdf:type rdf:resource="http://www.w3.org/2003/01/geo/wgs84_pos#Point"/>
+	<rdfs:label>Geometry points of Thing: Example Road Household Waste and Recycling Centre</rdfs:label>
+	<geo:lat rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">53.4091</geo:lat>
+	<geo:long rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">-2.37394</geo:long>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.gmdsp.org.uk/id/localauthorityname/recycling/location/rec-2">
+	<locn:geometry rdf:resource="http://data.gmdsp.org.uk/id/localauthorityname/recycling/geometry/rec-2"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.gmdsp.org.uk/id/localauthorityname/recycling/rec-2">
+	<locn:location rdf:resource="http://data.gmdsp.org.uk/id/localauthorityname/recycling/location/rec-2"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.gmdsp.org.uk/id/localauthorityname/recycling/contact/rec-2">
+	<rdf:type rdf:resource="http://www.w3.org/2006/vcard/ns#Contact"/>
+	<rdfs:label>Contact details for Recycling Site: Example Road Household Waste and Recycling Centre</rdfs:label>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.gmdsp.org.uk/id/localauthorityname/recycling/rec-2">
+	<oo:contact rdf:resource="http://data.gmdsp.org.uk/id/localauthorityname/recycling/contact/rec-2"/>
+	<gmdsp:hasFacility rdf:resource="http://data.gmdsp.org.uk/def/council/recycling/recycling-type/paper"/>
+	<gmdsp:recyclingType rdf:resource="http://data.gmdsp.org.uk/def/council/recycling/recycling-type/dry"/>
+</rdf:Description>
+
+</rdf:RDF>
