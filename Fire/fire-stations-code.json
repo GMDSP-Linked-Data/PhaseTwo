@@ -1,0 +1,151 @@
+[{
+    "op": "rdf-extension/save-rdf-schema",
+    "description": "Save RDF schema skeleton",
+    "schema": {
+        "baseUri": "http://127.0.0.1:3333/",
+        "prefixes": [{
+            "name": "os",
+            "uri": "http://data.ordnancesurvey.co.uk/ontology/spatialrelations/"
+        }, {
+            "name": "rdf",
+            "uri": "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+        }, {
+            "name": "owl",
+            "uri": "http://www.w3.org/2002/07/owl#"
+        }, {
+            "name": "xsd",
+            "uri": "http://www.w3.org/2001/XMLSchema#"
+        }, {
+            "name": "fire",
+            "uri": "http://data.gmdsp.org.uk/def/fire-and-rescue/"
+        }, {
+            "name": "rdfs",
+            "uri": "http://www.w3.org/2000/01/rdf-schema#"
+        }, {
+            "name": "foaf",
+            "uri": "http://xmlns.com/foaf/0.1/"
+        }],
+        "rootNodes": [{
+            "nodeType": "cell-as-resource",
+            "expression": "\"http://data.gmdsp.org.uk/id/fire-and-rescue/\" + value.urlify()",
+            "isRowNumberCell": false,
+            "columnName": "Station Name",
+            "rdfTypes": [{
+                "uri": "http://data.gmdsp.org.uk/def/fire-and-rescue/FireStation",
+                "curie": "fire:FireStation"
+            }],
+            "links": [{
+                "uri": "http://www.w3.org/2000/01/rdf-schema#label",
+                "curie": "rdfs:label",
+                "target": {
+                    "nodeType": "cell-as-literal",
+                    "expression": "value",
+                    "isRowNumberCell": false,
+                    "columnName": "Station Name"
+                }
+            }, {
+                "uri": "http://data.gmdsp.org.uk/def/fire-and-rescue/callSign",
+                "curie": "fire:callSign",
+                "target": {
+                    "nodeType": "cell-as-literal",
+                    "expression": "value",
+                    "isRowNumberCell": false,
+                    "columnName": "Call_Sign"
+                }
+            }, {
+                "uri": "http://data.ordnancesurvey.co.uk/ontology/spatialrelations/easting",
+                "curie": "os:easting",
+                "target": {
+                    "nodeType": "cell-as-literal",
+                    "expression": "value",
+                    "isRowNumberCell": false,
+                    "columnName": "Easting"
+                }
+            }, {
+                "uri": "http://data.ordnancesurvey.co.uk/ontology/spatialrelations/northing",
+                "curie": "os:northing",
+                "target": {
+                    "nodeType": "cell-as-literal",
+                    "expression": "value",
+                    "isRowNumberCell": false,
+                    "columnName": "Northing"
+                }
+            }]
+        }]
+    }
+}, {
+    "op": "rdf-extension/save-rdf-schema",
+    "description": "Save RDF schema skeleton",
+    "schema": {
+        "baseUri": "http://127.0.0.1:3333/",
+        "prefixes": [{
+            "name": "os",
+            "uri": "http://data.ordnancesurvey.co.uk/ontology/spatialrelations/"
+        }, {
+            "name": "rdf",
+            "uri": "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+        }, {
+            "name": "owl",
+            "uri": "http://www.w3.org/2002/07/owl#"
+        }, {
+            "name": "xsd",
+            "uri": "http://www.w3.org/2001/XMLSchema#"
+        }, {
+            "name": "fire",
+            "uri": "http://data.gmdsp.org.uk/def/fire-and-rescue/"
+        }, {
+            "name": "rdfs",
+            "uri": "http://www.w3.org/2000/01/rdf-schema#"
+        }, {
+            "name": "foaf",
+            "uri": "http://xmlns.com/foaf/0.1/"
+        }],
+        "rootNodes": [{
+            "nodeType": "cell-as-resource",
+            "expression": "\"http://data.gmdsp.org.uk/id/fire-and-rescue/fire-station/\" + value.urlify()",
+            "isRowNumberCell": false,
+            "columnName": "Station Name",
+            "rdfTypes": [{
+                "uri": "http://data.gmdsp.org.uk/def/fire-and-rescue/FireStation",
+                "curie": "fire:FireStation"
+            }],
+            "links": [{
+                "uri": "http://www.w3.org/2000/01/rdf-schema#label",
+                "curie": "rdfs:label",
+                "target": {
+                    "nodeType": "cell-as-literal",
+                    "expression": "value",
+                    "isRowNumberCell": false,
+                    "columnName": "Station Name"
+                }
+            }, {
+                "uri": "http://data.gmdsp.org.uk/def/fire-and-rescue/callSign",
+                "curie": "fire:callSign",
+                "target": {
+                    "nodeType": "cell-as-literal",
+                    "expression": "value",
+                    "isRowNumberCell": false,
+                    "columnName": "Call_Sign"
+                }
+            }, {
+                "uri": "http://data.ordnancesurvey.co.uk/ontology/spatialrelations/easting",
+                "curie": "os:easting",
+                "target": {
+                    "nodeType": "cell-as-literal",
+                    "expression": "value",
+                    "isRowNumberCell": false,
+                    "columnName": "Easting"
+                }
+            }, {
+                "uri": "http://data.ordnancesurvey.co.uk/ontology/spatialrelations/northing",
+                "curie": "os:northing",
+                "target": {
+                    "nodeType": "cell-as-literal",
+                    "expression": "value",
+                    "isRowNumberCell": false,
+                    "columnName": "Northing"
+                }
+            }]
+        }]
+    }
+}]
