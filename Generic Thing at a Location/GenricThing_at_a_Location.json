@@ -6,12 +6,12 @@
       "baseUri": "http://data.gmdsp.org.uk/id/localauthorityname/thing/",
       "prefixes": [
         {
-          "name": "gmdsp",
-          "uri": "http://data.gmdsp.org.uk/def/council/thing/"
-        },
-        {
           "name": "rdfs",
           "uri": "http://www.w3.org/2000/01/rdf-schema#"
+        },
+        {
+          "name": "gmdsp",
+          "uri": "http://data.gmdsp.org.uk/def/council/thing/"
         },
         {
           "name": "geo",
@@ -22,24 +22,24 @@
           "uri": "http://data.ordnancesurvey.co.uk/ontology/spatialrelations/"
         },
         {
-          "name": "owl",
-          "uri": "http://www.w3.org/2002/07/owl#"
-        },
-        {
           "name": "xsd",
           "uri": "http://www.w3.org/2001/XMLSchema#"
+        },
+        {
+          "name": "owl",
+          "uri": "http://www.w3.org/2002/07/owl#"
         },
         {
           "name": "rdf",
           "uri": "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
         },
         {
-          "name": "locn",
-          "uri": "http://www.w3.org/ns/locn#"
-        },
-        {
           "name": "skos",
           "uri": "http://www.w3.org/2004/02/skos/core#"
+        },
+        {
+          "name": "locn",
+          "uri": "http://www.w3.org/ns/locn#"
         },
         {
           "name": "dcterms",
@@ -231,6 +231,882 @@
                             "nodeType": "cell-as-literal",
                             "expression": "'Geometry points of Thing: '+value",
                             "isRowNumberCell": false,
+                            "columnName": "ID"
+                          }
+                        },
+                        {
+                          "uri": "http://www.w3.org/2003/01/geo/wgs84_pos#lat",
+                          "curie": "geo:lat",
+                          "target": {
+                            "nodeType": "cell-as-literal",
+                            "expression": "value",
+                            "isRowNumberCell": false,
+                            "valueType": "http://www.w3.org/2001/XMLSchema#decimal",
+                            "columnName": "Latitude"
+                          }
+                        },
+                        {
+                          "uri": "http://www.w3.org/2003/01/geo/wgs84_pos#long",
+                          "curie": "geo:long",
+                          "target": {
+                            "nodeType": "cell-as-literal",
+                            "expression": "value",
+                            "isRowNumberCell": false,
+                            "valueType": "http://www.w3.org/2001/XMLSchema#decimal",
+                            "columnName": "Longitude"
+                          }
+                        },
+                        {
+                          "uri": "http://data.ordnancesurvey.co.uk/ontology/spatialrelations/easting",
+                          "curie": "osspr:easting",
+                          "target": {
+                            "nodeType": "cell-as-literal",
+                            "expression": "value",
+                            "isRowNumberCell": false,
+                            "valueType": "http://www.w3.org/2001/XMLSchema#decimal",
+                            "columnName": "Easting"
+                          }
+                        },
+                        {
+                          "uri": "http://data.ordnancesurvey.co.uk/ontology/spatialrelations/northing",
+                          "curie": "osspr:northing",
+                          "target": {
+                            "nodeType": "cell-as-literal",
+                            "expression": "value",
+                            "isRowNumberCell": false,
+                            "valueType": "http://www.w3.org/2001/XMLSchema#decimal",
+                            "columnName": "Northing"
+                          }
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "op": "rdf-extension/save-rdf-schema",
+    "description": "Save RDF schema skeleton",
+    "schema": {
+      "baseUri": "http://data.gmdsp.org.uk/id/localauthorityname/thing/",
+      "prefixes": [
+        {
+          "name": "rdfs",
+          "uri": "http://www.w3.org/2000/01/rdf-schema#"
+        },
+        {
+          "name": "gmdsp",
+          "uri": "http://data.gmdsp.org.uk/def/council/thing/"
+        },
+        {
+          "name": "geo",
+          "uri": "http://www.w3.org/2003/01/geo/wgs84_pos#"
+        },
+        {
+          "name": "osspr",
+          "uri": "http://data.ordnancesurvey.co.uk/ontology/spatialrelations/"
+        },
+        {
+          "name": "xsd",
+          "uri": "http://www.w3.org/2001/XMLSchema#"
+        },
+        {
+          "name": "owl",
+          "uri": "http://www.w3.org/2002/07/owl#"
+        },
+        {
+          "name": "rdf",
+          "uri": "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+        },
+        {
+          "name": "skos",
+          "uri": "http://www.w3.org/2004/02/skos/core#"
+        },
+        {
+          "name": "locn",
+          "uri": "http://www.w3.org/ns/locn#"
+        },
+        {
+          "name": "dcterms",
+          "uri": "http://purl.org/dc/terms/"
+        }
+      ],
+      "rootNodes": [
+        {
+          "nodeType": "cell-as-resource",
+          "expression": "value.urlify()",
+          "isRowNumberCell": false,
+          "columnName": "ID",
+          "rdfTypes": [
+            {
+              "uri": "http://data.gmdsp.org.uk/def/council/thing/Thing",
+              "curie": "gmdsp:Thing"
+            },
+            {
+              "uri": "http://www.w3.org/2002/07/owl#Thing",
+              "curie": "owl:Thing"
+            }
+          ],
+          "links": [
+            {
+              "uri": "http://www.w3.org/2000/01/rdf-schema#label",
+              "curie": "rdfs:label",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "SiteName"
+              }
+            },
+            {
+              "uri": "http://www.w3.org/2000/01/rdf-schema#comment",
+              "curie": "rdfs:comment",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "Description"
+              }
+            },
+            {
+              "uri": "http://www.w3.org/2004/02/skos/core#notation",
+              "curie": "skos:notation",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "Reference"
+              }
+            },
+            {
+              "uri": "http://www.w3.org/ns/locn#location",
+              "curie": "locn:location",
+              "target": {
+                "nodeType": "cell-as-resource",
+                "expression": "'http://data.gmdsp.org.uk/id/localauthorityname/thing/location/'+value.urlify()",
+                "isRowNumberCell": false,
+                "columnName": "ID",
+                "rdfTypes": [
+                  {
+                    "uri": "http://purl.org/dc/terms/Location",
+                    "curie": "dcterms:Location"
+                  }
+                ],
+                "links": [
+                  {
+                    "uri": "http://www.w3.org/2000/01/rdf-schema#label",
+                    "curie": "rdfs:label",
+                    "target": {
+                      "nodeType": "cell-as-literal",
+                      "expression": "'Location of Thing: '+value",
+                      "isRowNumberCell": false,
+                      "columnName": "ID"
+                    }
+                  },
+                  {
+                    "uri": "http://www.w3.org/ns/locn#address",
+                    "curie": "locn:address",
+                    "target": {
+                      "nodeType": "cell-as-resource",
+                      "expression": "'http://data.gmdsp.org.uk/id/localauthorityname/thing/address/'+value.urlify()",
+                      "isRowNumberCell": false,
+                      "columnName": "ID",
+                      "rdfTypes": [
+                        {
+                          "uri": "http://www.w3.org/ns/locn#Address",
+                          "curie": "locn:Address"
+                        }
+                      ],
+                      "links": [
+                        {
+                          "uri": "http://www.w3.org/2000/01/rdf-schema#label",
+                          "curie": "rdfs:label",
+                          "target": {
+                            "nodeType": "cell-as-literal",
+                            "expression": "'Address of Thing: '+value",
+                            "isRowNumberCell": false,
+                            "columnName": "ID"
+                          }
+                        },
+                        {
+                          "uri": "http://www.w3.org/ns/locn#addressId",
+                          "curie": "locn:addressId",
+                          "target": {
+                            "nodeType": "cell-as-literal",
+                            "expression": "value",
+                            "isRowNumberCell": false,
+                            "columnName": "SiteName"
+                          }
+                        },
+                        {
+                          "uri": "http://www.w3.org/ns/locn#fullAddress",
+                          "curie": "locn:fullAddress",
+                          "target": {
+                            "nodeType": "cell-as-literal",
+                            "expression": "cells[\"Address 1\"].value + \", \" + cells[\"Street\"].value + \", \" + cells[\"Locality\"].value + \", \" + cells[\"Town\"].value + \", \" + cells[\"Postcode\"].value",
+                            "isRowNumberCell": true
+                          }
+                        },
+                        {
+                          "uri": "http://www.w3.org/ns/locn#thoroughfare",
+                          "curie": "locn:thoroughfare",
+                          "target": {
+                            "nodeType": "cell-as-literal",
+                            "expression": "value",
+                            "isRowNumberCell": false,
+                            "columnName": "Address 1"
+                          }
+                        },
+                        {
+                          "uri": "http://www.w3.org/ns/locn#addressArea",
+                          "curie": "locn:addressArea",
+                          "target": {
+                            "nodeType": "cell-as-literal",
+                            "expression": "value",
+                            "isRowNumberCell": false,
+                            "columnName": "Locality"
+                          }
+                        },
+                        {
+                          "uri": "http://www.w3.org/ns/locn#postName",
+                          "curie": "locn:postName",
+                          "target": {
+                            "nodeType": "cell-as-literal",
+                            "expression": "value",
+                            "isRowNumberCell": false,
+                            "columnName": "Town"
+                          }
+                        },
+                        {
+                          "uri": "http://www.w3.org/ns/locn#postCode",
+                          "curie": "locn:postCode",
+                          "target": {
+                            "nodeType": "cell-as-literal",
+                            "expression": "value",
+                            "isRowNumberCell": false,
+                            "columnName": "Postcode"
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "uri": "http://www.w3.org/ns/locn#geometry",
+                    "curie": "locn:geometry",
+                    "target": {
+                      "nodeType": "cell-as-resource",
+                      "expression": "'http://data.gmdsp.org.uk/id/localauthorityname/thing/geometry/'+value.urlify()",
+                      "isRowNumberCell": false,
+                      "columnName": "ID",
+                      "rdfTypes": [
+                        {
+                          "uri": "http://www.w3.org/ns/locn#Geometry",
+                          "curie": "locn:Geometry"
+                        },
+                        {
+                          "uri": "http://www.w3.org/2003/01/geo/wgs84_pos#Point",
+                          "curie": "geo:Point"
+                        }
+                      ],
+                      "links": [
+                        {
+                          "uri": "http://www.w3.org/2000/01/rdf-schema#label",
+                          "curie": "rdfs:label",
+                          "target": {
+                            "nodeType": "cell-as-literal",
+                            "expression": "'Geometry points of Thing: '+value",
+                            "isRowNumberCell": false,
+                            "columnName": "ID"
+                          }
+                        },
+                        {
+                          "uri": "http://www.w3.org/2003/01/geo/wgs84_pos#lat",
+                          "curie": "geo:lat",
+                          "target": {
+                            "nodeType": "cell-as-literal",
+                            "expression": "value",
+                            "isRowNumberCell": false,
+                            "valueType": "http://www.w3.org/2001/XMLSchema#decimal",
+                            "columnName": "Latitude"
+                          }
+                        },
+                        {
+                          "uri": "http://www.w3.org/2003/01/geo/wgs84_pos#long",
+                          "curie": "geo:long",
+                          "target": {
+                            "nodeType": "cell-as-literal",
+                            "expression": "value",
+                            "isRowNumberCell": false,
+                            "valueType": "http://www.w3.org/2001/XMLSchema#decimal",
+                            "columnName": "Longitude"
+                          }
+                        },
+                        {
+                          "uri": "http://data.ordnancesurvey.co.uk/ontology/spatialrelations/easting",
+                          "curie": "osspr:easting",
+                          "target": {
+                            "nodeType": "cell-as-literal",
+                            "expression": "value",
+                            "isRowNumberCell": false,
+                            "valueType": "http://www.w3.org/2001/XMLSchema#decimal",
+                            "columnName": "Easting"
+                          }
+                        },
+                        {
+                          "uri": "http://data.ordnancesurvey.co.uk/ontology/spatialrelations/northing",
+                          "curie": "osspr:northing",
+                          "target": {
+                            "nodeType": "cell-as-literal",
+                            "expression": "value",
+                            "isRowNumberCell": false,
+                            "valueType": "http://www.w3.org/2001/XMLSchema#decimal",
+                            "columnName": "Northing"
+                          }
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "op": "rdf-extension/save-rdf-schema",
+    "description": "Save RDF schema skeleton",
+    "schema": {
+      "baseUri": "http://data.gmdsp.org.uk/id/localauthorityname/thing/",
+      "prefixes": [
+        {
+          "name": "gmdsp",
+          "uri": "http://data.gmdsp.org.uk/def/council/thing/"
+        },
+        {
+          "name": "rdfs",
+          "uri": "http://www.w3.org/2000/01/rdf-schema#"
+        },
+        {
+          "name": "geo",
+          "uri": "http://www.w3.org/2003/01/geo/wgs84_pos#"
+        },
+        {
+          "name": "osspr",
+          "uri": "http://data.ordnancesurvey.co.uk/ontology/spatialrelations/"
+        },
+        {
+          "name": "owl",
+          "uri": "http://www.w3.org/2002/07/owl#"
+        },
+        {
+          "name": "xsd",
+          "uri": "http://www.w3.org/2001/XMLSchema#"
+        },
+        {
+          "name": "rdf",
+          "uri": "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+        },
+        {
+          "name": "locn",
+          "uri": "http://www.w3.org/ns/locn#"
+        },
+        {
+          "name": "skos",
+          "uri": "http://www.w3.org/2004/02/skos/core#"
+        },
+        {
+          "name": "dcterms",
+          "uri": "http://purl.org/dc/terms/"
+        }
+      ],
+      "rootNodes": [
+        {
+          "nodeType": "cell-as-resource",
+          "expression": "value.urlify()",
+          "isRowNumberCell": false,
+          "columnName": "ID",
+          "rdfTypes": [
+            {
+              "uri": "http://data.gmdsp.org.uk/def/council/thing/Thing",
+              "curie": "gmdsp:Thing"
+            },
+            {
+              "uri": "http://www.w3.org/2002/07/owl#Thing",
+              "curie": "owl:Thing"
+            }
+          ],
+          "links": [
+            {
+              "uri": "http://www.w3.org/2000/01/rdf-schema#label",
+              "curie": "rdfs:label",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "lang": "en",
+                "columnName": "SiteName"
+              }
+            },
+            {
+              "uri": "http://www.w3.org/2000/01/rdf-schema#comment",
+              "curie": "rdfs:comment",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "lang": "en",
+                "columnName": "Description"
+              }
+            },
+            {
+              "uri": "http://www.w3.org/2004/02/skos/core#notation",
+              "curie": "skos:notation",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "Reference"
+              }
+            },
+            {
+              "uri": "http://www.w3.org/ns/locn#location",
+              "curie": "locn:location",
+              "target": {
+                "nodeType": "cell-as-resource",
+                "expression": "'location/'+value.urlify()",
+                "isRowNumberCell": false,
+                "columnName": "ID",
+                "rdfTypes": [
+                  {
+                    "uri": "http://purl.org/dc/terms/Location",
+                    "curie": "dcterms:Location"
+                  }
+                ],
+                "links": [
+                  {
+                    "uri": "http://www.w3.org/2000/01/rdf-schema#label",
+                    "curie": "rdfs:label",
+                    "target": {
+                      "nodeType": "cell-as-literal",
+                      "expression": "'Location of Thing: '+value",
+                      "isRowNumberCell": false,
+                      "columnName": "ID"
+                    }
+                  },
+                  {
+                    "uri": "http://www.w3.org/ns/locn#address",
+                    "curie": "locn:address",
+                    "target": {
+                      "nodeType": "cell-as-resource",
+                      "expression": "'address/'+value.urlify()",
+                      "isRowNumberCell": false,
+                      "columnName": "ID",
+                      "rdfTypes": [
+                        {
+                          "uri": "http://www.w3.org/ns/locn#Address",
+                          "curie": "locn:Address"
+                        }
+                      ],
+                      "links": [
+                        {
+                          "uri": "http://www.w3.org/2000/01/rdf-schema#label",
+                          "curie": "rdfs:label",
+                          "target": {
+                            "nodeType": "cell-as-literal",
+                            "expression": "'Address of Thing: '+value",
+                            "isRowNumberCell": false,
+                            "columnName": "ID"
+                          }
+                        },
+                        {
+                          "uri": "http://www.w3.org/ns/locn#addressId",
+                          "curie": "locn:addressId",
+                          "target": {
+                            "nodeType": "cell-as-literal",
+                            "expression": "value",
+                            "isRowNumberCell": false,
+                            "columnName": "SiteName"
+                          }
+                        },
+                        {
+                          "uri": "http://www.w3.org/ns/locn#fullAddress",
+                          "curie": "locn:fullAddress",
+                          "target": {
+                            "nodeType": "cell-as-literal",
+                            "expression": "cells[\"Address 1\"].value + \", \" + cells[\"Street\"].value + \", \" + cells[\"Locality\"].value + \", \" + cells[\"Town\"].value + \", \" + cells[\"Postcode\"].value",
+                            "isRowNumberCell": true
+                          }
+                        },
+                        {
+                          "uri": "http://www.w3.org/ns/locn#thoroughfare",
+                          "curie": "locn:thoroughfare",
+                          "target": {
+                            "nodeType": "cell-as-literal",
+                            "expression": "value",
+                            "isRowNumberCell": false,
+                            "columnName": "Address 1"
+                          }
+                        },
+                        {
+                          "uri": "http://www.w3.org/ns/locn#addressArea",
+                          "curie": "locn:addressArea",
+                          "target": {
+                            "nodeType": "cell-as-literal",
+                            "expression": "value",
+                            "isRowNumberCell": false,
+                            "columnName": "Locality"
+                          }
+                        },
+                        {
+                          "uri": "http://www.w3.org/ns/locn#postName",
+                          "curie": "locn:postName",
+                          "target": {
+                            "nodeType": "cell-as-literal",
+                            "expression": "value",
+                            "isRowNumberCell": false,
+                            "columnName": "Town"
+                          }
+                        },
+                        {
+                          "uri": "http://www.w3.org/ns/locn#postCode",
+                          "curie": "locn:postCode",
+                          "target": {
+                            "nodeType": "cell-as-literal",
+                            "expression": "value",
+                            "isRowNumberCell": false,
+                            "columnName": "Postcode"
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "uri": "http://www.w3.org/ns/locn#geometry",
+                    "curie": "locn:geometry",
+                    "target": {
+                      "nodeType": "cell-as-resource",
+                      "expression": "'geometry/'+value.urlify()",
+                      "isRowNumberCell": false,
+                      "columnName": "ID",
+                      "rdfTypes": [
+                        {
+                          "uri": "http://www.w3.org/ns/locn#Geometry",
+                          "curie": "locn:Geometry"
+                        },
+                        {
+                          "uri": "http://www.w3.org/2003/01/geo/wgs84_pos#Point",
+                          "curie": "geo:Point"
+                        }
+                      ],
+                      "links": [
+                        {
+                          "uri": "http://www.w3.org/2000/01/rdf-schema#label",
+                          "curie": "rdfs:label",
+                          "target": {
+                            "nodeType": "cell-as-literal",
+                            "expression": "'Geometry points of Thing: '+value",
+                            "isRowNumberCell": false,
+                            "lang": "en",
+                            "columnName": "ID"
+                          }
+                        },
+                        {
+                          "uri": "http://www.w3.org/2003/01/geo/wgs84_pos#lat",
+                          "curie": "geo:lat",
+                          "target": {
+                            "nodeType": "cell-as-literal",
+                            "expression": "value",
+                            "isRowNumberCell": false,
+                            "valueType": "http://www.w3.org/2001/XMLSchema#decimal",
+                            "columnName": "Latitude"
+                          }
+                        },
+                        {
+                          "uri": "http://www.w3.org/2003/01/geo/wgs84_pos#long",
+                          "curie": "geo:long",
+                          "target": {
+                            "nodeType": "cell-as-literal",
+                            "expression": "value",
+                            "isRowNumberCell": false,
+                            "valueType": "http://www.w3.org/2001/XMLSchema#decimal",
+                            "columnName": "Longitude"
+                          }
+                        },
+                        {
+                          "uri": "http://data.ordnancesurvey.co.uk/ontology/spatialrelations/easting",
+                          "curie": "osspr:easting",
+                          "target": {
+                            "nodeType": "cell-as-literal",
+                            "expression": "value",
+                            "isRowNumberCell": false,
+                            "valueType": "http://www.w3.org/2001/XMLSchema#decimal",
+                            "columnName": "Easting"
+                          }
+                        },
+                        {
+                          "uri": "http://data.ordnancesurvey.co.uk/ontology/spatialrelations/northing",
+                          "curie": "osspr:northing",
+                          "target": {
+                            "nodeType": "cell-as-literal",
+                            "expression": "value",
+                            "isRowNumberCell": false,
+                            "valueType": "http://www.w3.org/2001/XMLSchema#decimal",
+                            "columnName": "Northing"
+                          }
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "op": "rdf-extension/save-rdf-schema",
+    "description": "Save RDF schema skeleton",
+    "schema": {
+      "baseUri": "http://data.gmdsp.org.uk/id/localauthorityname/thing/",
+      "prefixes": [
+        {
+          "name": "gmdsp",
+          "uri": "http://data.gmdsp.org.uk/def/council/thing/"
+        },
+        {
+          "name": "rdfs",
+          "uri": "http://www.w3.org/2000/01/rdf-schema#"
+        },
+        {
+          "name": "geo",
+          "uri": "http://www.w3.org/2003/01/geo/wgs84_pos#"
+        },
+        {
+          "name": "osspr",
+          "uri": "http://data.ordnancesurvey.co.uk/ontology/spatialrelations/"
+        },
+        {
+          "name": "owl",
+          "uri": "http://www.w3.org/2002/07/owl#"
+        },
+        {
+          "name": "xsd",
+          "uri": "http://www.w3.org/2001/XMLSchema#"
+        },
+        {
+          "name": "rdf",
+          "uri": "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+        },
+        {
+          "name": "locn",
+          "uri": "http://www.w3.org/ns/locn#"
+        },
+        {
+          "name": "skos",
+          "uri": "http://www.w3.org/2004/02/skos/core#"
+        },
+        {
+          "name": "dcterms",
+          "uri": "http://purl.org/dc/terms/"
+        }
+      ],
+      "rootNodes": [
+        {
+          "nodeType": "cell-as-resource",
+          "expression": "value.urlify()",
+          "isRowNumberCell": false,
+          "columnName": "ID",
+          "rdfTypes": [
+            {
+              "uri": "http://data.gmdsp.org.uk/def/council/thing/Thing",
+              "curie": "gmdsp:Thing"
+            },
+            {
+              "uri": "http://www.w3.org/2002/07/owl#Thing",
+              "curie": "owl:Thing"
+            }
+          ],
+          "links": [
+            {
+              "uri": "http://www.w3.org/2000/01/rdf-schema#label",
+              "curie": "rdfs:label",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "lang": "en",
+                "columnName": "SiteName"
+              }
+            },
+            {
+              "uri": "http://www.w3.org/2000/01/rdf-schema#comment",
+              "curie": "rdfs:comment",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "lang": "en",
+                "columnName": "Description"
+              }
+            },
+            {
+              "uri": "http://www.w3.org/2004/02/skos/core#notation",
+              "curie": "skos:notation",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "Reference"
+              }
+            },
+            {
+              "uri": "http://www.w3.org/ns/locn#location",
+              "curie": "locn:location",
+              "target": {
+                "nodeType": "cell-as-resource",
+                "expression": "'location/'+value.urlify()",
+                "isRowNumberCell": false,
+                "columnName": "ID",
+                "rdfTypes": [
+                  {
+                    "uri": "http://purl.org/dc/terms/Location",
+                    "curie": "dcterms:Location"
+                  }
+                ],
+                "links": [
+                  {
+                    "uri": "http://www.w3.org/2000/01/rdf-schema#label",
+                    "curie": "rdfs:label",
+                    "target": {
+                      "nodeType": "cell-as-literal",
+                      "expression": "'Location of Thing: '+value",
+                      "isRowNumberCell": false,
+                      "columnName": "ID"
+                    }
+                  },
+                  {
+                    "uri": "http://www.w3.org/ns/locn#address",
+                    "curie": "locn:address",
+                    "target": {
+                      "nodeType": "cell-as-resource",
+                      "expression": "'address/'+value.urlify()",
+                      "isRowNumberCell": false,
+                      "columnName": "ID",
+                      "rdfTypes": [
+                        {
+                          "uri": "http://www.w3.org/ns/locn#Address",
+                          "curie": "locn:Address"
+                        }
+                      ],
+                      "links": [
+                        {
+                          "uri": "http://www.w3.org/2000/01/rdf-schema#label",
+                          "curie": "rdfs:label",
+                          "target": {
+                            "nodeType": "cell-as-literal",
+                            "expression": "'Address of Thing: '+value",
+                            "isRowNumberCell": false,
+                            "columnName": "ID"
+                          }
+                        },
+                        {
+                          "uri": "http://www.w3.org/ns/locn#addressId",
+                          "curie": "locn:addressId",
+                          "target": {
+                            "nodeType": "cell-as-literal",
+                            "expression": "value",
+                            "isRowNumberCell": false,
+                            "columnName": "SiteName"
+                          }
+                        },
+                        {
+                          "uri": "http://www.w3.org/ns/locn#fullAddress",
+                          "curie": "locn:fullAddress",
+                          "target": {
+                            "nodeType": "cell-as-literal",
+                            "expression": "cells[\"Address 1\"].value + \", \" + cells[\"Street\"].value + \", \" + cells[\"Locality\"].value + \", \" + cells[\"Town\"].value + \", \" + cells[\"Postcode\"].value",
+                            "isRowNumberCell": true
+                          }
+                        },
+                        {
+                          "uri": "http://www.w3.org/ns/locn#thoroughfare",
+                          "curie": "locn:thoroughfare",
+                          "target": {
+                            "nodeType": "cell-as-literal",
+                            "expression": "value",
+                            "isRowNumberCell": false,
+                            "columnName": "Address 1"
+                          }
+                        },
+                        {
+                          "uri": "http://www.w3.org/ns/locn#addressArea",
+                          "curie": "locn:addressArea",
+                          "target": {
+                            "nodeType": "cell-as-literal",
+                            "expression": "value",
+                            "isRowNumberCell": false,
+                            "columnName": "Locality"
+                          }
+                        },
+                        {
+                          "uri": "http://www.w3.org/ns/locn#postName",
+                          "curie": "locn:postName",
+                          "target": {
+                            "nodeType": "cell-as-literal",
+                            "expression": "value",
+                            "isRowNumberCell": false,
+                            "columnName": "Town"
+                          }
+                        },
+                        {
+                          "uri": "http://www.w3.org/ns/locn#postCode",
+                          "curie": "locn:postCode",
+                          "target": {
+                            "nodeType": "cell-as-literal",
+                            "expression": "value",
+                            "isRowNumberCell": false,
+                            "columnName": "Postcode"
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "uri": "http://www.w3.org/ns/locn#geometry",
+                    "curie": "locn:geometry",
+                    "target": {
+                      "nodeType": "cell-as-resource",
+                      "expression": "'geometry/'+value.urlify()",
+                      "isRowNumberCell": false,
+                      "columnName": "ID",
+                      "rdfTypes": [
+                        {
+                          "uri": "http://www.w3.org/ns/locn#Geometry",
+                          "curie": "locn:Geometry"
+                        },
+                        {
+                          "uri": "http://www.w3.org/2003/01/geo/wgs84_pos#Point",
+                          "curie": "geo:Point"
+                        }
+                      ],
+                      "links": [
+                        {
+                          "uri": "http://www.w3.org/2000/01/rdf-schema#label",
+                          "curie": "rdfs:label",
+                          "target": {
+                            "nodeType": "cell-as-literal",
+                            "expression": "'Geometry points of Thing: '+value",
+                            "isRowNumberCell": false,
+                            "lang": "en",
                             "columnName": "ID"
                           }
                         },

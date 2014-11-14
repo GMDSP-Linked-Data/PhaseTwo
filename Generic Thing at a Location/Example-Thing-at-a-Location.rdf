@@ -14,8 +14,8 @@
 <rdf:Description rdf:about="http://data.gmdsp.org.uk/id/localauthorityname/thing/1234">
 	<rdf:type rdf:resource="http://data.gmdsp.org.uk/def/council/thing/Thing"/>
 	<rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
-	<rdfs:label>Example Site</rdfs:label>
-	<rdfs:comment>Example Description</rdfs:comment>
+	<rdfs:label xml:lang="en">Example Site</rdfs:label>
+	<rdfs:comment xml:lang="en">Example Description</rdfs:comment>
 	<skos:notation>1234-ABC</skos:notation>
 </rdf:Description>
 
@@ -42,7 +42,7 @@
 <rdf:Description rdf:about="http://data.gmdsp.org.uk/id/localauthorityname/thing/geometry/1234">
 	<rdf:type rdf:resource="http://www.w3.org/ns/locn#Geometry"/>
 	<rdf:type rdf:resource="http://www.w3.org/2003/01/geo/wgs84_pos#Point"/>
-	<rdfs:label>Geometry points of Thing: 1234</rdfs:label>
+	<rdfs:label xml:lang="en">Geometry points of Thing: 1234</rdfs:label>
 	<geo:lat rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">10.00001</geo:lat>
 	<geo:long rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">-3.1</geo:long>
 	<osspr:easting rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">111111.1</osspr:easting>
