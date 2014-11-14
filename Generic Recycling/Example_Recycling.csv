@@ -1,3 +1,0 @@
-ID,SiteFullName,Street,Town,PostCode,Telephone,Website,Latitude,Longitude,PAPER,DRY,GLASS,CANS,PLASTIC,TEXTILES,SHOES,BOOKS,TETRAPAK,FURNITURE,HARD_PLASTIC,EXTRAFACILITIES
-REC-1,Supermarket Recycling Facility,Example Street,Example Town,M1 1AA,0161 111 1111,http://www.example.gov.uk/recycling ,53.3839,-2.3508,Paper,Dry,Glass,Cans,Plastic,Textiles,Shoes,,,,,
-REC-2,Example Road Household Waste and Recycling Centre,Example Road,Example Town,M2 2AA,,http://www.example.gov.uk/recycling ,53.4091,-2.37394,Paper,Dry,Glass,Cans,Plastic,Textiles,Shoes,,,Furniture,,Extra Facilities
