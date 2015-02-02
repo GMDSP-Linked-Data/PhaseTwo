@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<script>
+    var baseURL = "http://data.gmdsp.org.uk/sparql.json??utf8=%E2%9C%93&query=";
+    var backBtn = '<button onclick = "showPreviousInstruction()" type="button" class="btn btn-default btn-sml"><span class="glyphicon glyphicon-circle-arrow-left" aria-hidden="true"></span></button>';
+    var instructionCounter = -1;
+    var instructionArray = [{
+            title: 'Welcome',
+            text: 'This web application is designed to give you a simple hands on intro to using sparql to access GMDSP data. <br><br> The application will attempt to explain some simple Sparql queries to you, and allow you to edit them in the window on the right, helping you understand how they work.<br><br>Press next to continue...',
+            code: 'Your code will go here!'
+        }, {
+            title: 'Getting Started',
+            text: 'SPARQL - or SPARQL Protocol and RDF Query Language, is a "semantic" language used for making queries on databases with data stored in the RDF (Resource Description Framework) format.<br><br> Sparql queries are entered at a SPARQL endpoint. One sparql endpoint for GMDSP data is the dark box on the right - however sparql endpoints exist at other places, such as here: http://dbpedia.org/sparql, for querying the DBPedia database.',
+            code: ''
+        },
+
+        {
+            title: 'URIs',
+            text: 'URIs or Uniform Resource Identifiers identify a unique resource. In sparql we can use things called prefix definitions to abbriviate URIs. For example, with the code on the right, we are telling sparql that the uri PREFIX geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> should be refered to by geo.',
+            code: 'PREFIX geo: <http://www.w3.org/2003/01/geo/wgs84_pos#>'
+
+        }, {
+            title: 'Variables',
+            text: 'Variables are values that change. In sparql we refer to variables with a ?. In this example, ?lat is a variable',
+            code: 'PREFIX geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> \n \n ?lat'
+
+        },
+
+        {
+            title: 'Literals',
+            text: 'Literals are values that stay the same. In sparql we refer to literals with "". In this example, "England" is a literal',
+            code: 'PREFIX geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> \n \n ?lat \n \n "England"'
+
+        }, {
+            title: 'Doing something useful',
+            text: 'You can try and press run at this stage, and you will see in the results box below that you get an error!<br>This is because we have not yet told sparql to do anything useful. We need to use a combination of URIs variables and literals along with some other statements to do anything useful',
+            code: 'PREFIX geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> \n \n  ?lat \n \n "England"'
+
+        }, {
+            title: 'SELECT',
+            text: 'The SELECT command tells Sparql what to select from the database. This is useful since we do not always need to see everything! In this example we are telling sparql to select on the latitude',
+            code: 'PREFIX geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> \n \n SELECT ?lat'
+
+        }, {
+            title: 'WHERE',
+            text: 'The WHERE command tells Sparql which conditions need to be met to select a tuple.',
+            code: 'PREFIX geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> \n \n SELECT ?lat'
+
+        }, {
+            title: 'Doing something useful',
+            text: 'Take a look at this simple query. It may look complicated at first but it is quite simple. We have our prefix definitions for URIs, our SELECT and WHERE statements, and our variables. This statement is should return the borough of incidents of type fire, where the property was a car. location, ward, borough northing and easting can be variable. Try running this query',
+            code: 'PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nPREFIX fire: <http://data.gmdsp.org.uk/def/fire-and-rescue/>\nPREFIX ord: <http://data.ordnancesurvey.co.uk/ontology/spatialrelations/>\nPREFIX ptype: <http://data.gmdsp.org.uk/def/fire-and-rescue/property-type/>\n\nSELECT  ?borough \n\nWHERE {\n?incident rdf:type fire:Incident.\n?incident fire:propertyType ptype:car.\n?incident fire:incidentLocation ?location.\n?location fire:wardName ?ward.\n?location fire:borough ?borough.\n?location ord:northing ?northing.\n?location ord:easting ?easting\n}\nLIMIT 100\n'
+
+        }, {
+            title: 'The all *',
+            text: 'We may want to find out more information than just the borough. For this, we can either add more ?variables to our select statement, or by replacing the ?variables with the * symbol, whcih selects ALL. Feel free to edit the code and run again for both these cases.',
+            code: 'PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nPREFIX fire: <http://data.gmdsp.org.uk/def/fire-and-rescue/>\nPREFIX ord: <http://data.ordnancesurvey.co.uk/ontology/spatialrelations/>\nPREFIX ptype: <http://data.gmdsp.org.uk/def/fire-and-rescue/property-type/>\n\nSELECT  ?borough ?northing ?easting\n\nWHERE {\n?incident rdf:type fire:Incident.\n?incident fire:propertyType ptype:car.\n?incident fire:incidentLocation ?location.\n?location fire:wardName ?ward.\n?location fire:borough ?borough.\n?location ord:northing ?northing.\n?location ord:easting ?easting\n}\nLIMIT 100\n'
+
+        }, {
+            title: 'Doing something useful',
+            text: 'We may want to narrow down our results further. We can do this using the WHERE statement in combination with literals - try changing the line ?location fire:borough ?borough in the WHERE statement, replacing the ?borough variable with a literal value for a borough such as "WIGAN". If you can not get it working, press next to see an example',
+            code: 'PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nPREFIX fire: <http://data.gmdsp.org.uk/def/fire-and-rescue/>\nPREFIX ord: <http://data.ordnancesurvey.co.uk/ontology/spatialrelations/>\nPREFIX ptype: <http://data.gmdsp.org.uk/def/fire-and-rescue/property-type/>\n\nSELECT ?easting ?northing\n\nWHERE {\n?incident rdf:type fire:Incident.\n?incident fire:propertyType ptype:car.\n?incident fire:incidentLocation ?location.\n?location fire:wardName ?ward.\n?location fire:borough "WIGAN".\n?location ord:northing ?northing.\n?location ord:easting ?easting\n}\nLIMIT 100\n'
+
+        }, {
+            title: 'LIMIT',
+            text: 'If you are wondering what the LIMIT statement means, this simply limits our results to x amount of results - in this case 100.',
+            code: 'PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nPREFIX fire: <http://data.gmdsp.org.uk/def/fire-and-rescue/>\nPREFIX ord: <http://data.ordnancesurvey.co.uk/ontology/spatialrelations/>\nPREFIX ptype: <http://data.gmdsp.org.uk/def/fire-and-rescue/property-type/>\n\nSELECT ?easting ?northing\n\nWHERE {\n?incident rdf:type fire:Incident.\n?incident fire:propertyType ptype:car.\n?incident fire:incidentLocation ?location.\n?location fire:wardName ?ward.\n?location fire:borough "WIGAN".\n?location ord:northing ?northing.\n?location ord:easting ?easting\n}\nLIMIT 100\n'
+
+        },
+    ];
+
+    function drawResultsTable(results){
+        var resultBox = document.getElementById('result');
+        resultBox.innerHTML = "";
+        tableString = '<table class="table"><thead><tr>';
+        var headingsArray = results.head.vars;
+        nCols = results.head.vars.length;
+        nRows = results.results.bindings.length;
+        for(i=0;i<nCols;i++){
+            tableString += '<th>'+headingsArray[i]+'</th>'
+        }
+        tableString += '</tr></thead>';
+        for(x=0;x<nRows;x++){
+            tableString += '<tr>';
+            console.log(results.results.bindings[x])
+                for(var propertyName in results.results.bindings[x]) {
+                    tableString += '<td>'+results.results.bindings[x][propertyName].value+'</td>';
+                }
+            tableString += '</tr>'
+        }
+        tableString += '</table>';
+        resultBox.innerHTML = tableString;
+    } 
+
+    function runCode() {
+        var resultBox = document.getElementById('result');
+        resultBox.innerHTML = "";
+        var query = ace.edit("code").getSession().getValue();
+        var encodedQuery = encodeURIComponent(query);
+        var requestURL = baseURL + encodedQuery;
+        $.ajax({
+            url: requestURL,
+            success: function(data) {
+                console.log(data)
+                drawResultsTable(data)
+            },
+            error: function(data) {
+                resultBox.innerHTML = JSON.stringify(data, null, 4);
+            }
+        });
+    }
+
+    function showPreviousInstruction() {
+        if (instructionCounter > 0) {
+            instructionCounter = instructionCounter - 1;
+            drawInstructions();
+        }         
+    }
+
+    function showNextInstruction() {
+        instructionCounter++;
+        drawInstructions();
+    }
+
+    function drawInstructions(){
+        var title = document.getElementById('instructionTitle');
+        var instruction = document.getElementById('instructionText');
+        if (instructionCounter < instructionArray.length) {
+            if (instructionCounter != 0) {
+                title.innerHTML = backBtn+' '+instructionArray[instructionCounter].title;        
+            } else {   
+                title.innerHTML = instructionArray[instructionCounter].title;
+            }  
+            instruction.innerHTML = instructionArray[instructionCounter].text;
+            
+            var editor = ace.edit("code");
+            editor.setTheme("ace/theme/monokai");
+            editor.resize()
+            editor.getSession().setUseWrapMode(true);
+            editor.getSession().setMode("ace/mode/sql");
+            editor.getSession().setValue(instructionArray[instructionCounter].code);
+       
+        } else {
+            title.innerHTML = backBtn+' '+"Well done";
+            instruction.innerHTML = "You have completed the introduction, if you have any questions, please contact me at jamesr.gallagher1@gmail.com";
+        }
+    }
+</script>
+
+<head>
+    <meta charset="utf-8">
+    <title>GMDSP Sparql Walkthrough</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <!-- Fav and touch icons -->
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="img/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="img/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="img/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="img/apple-touch-icon-57-precomposed.png">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/4.8.0/codemirror.min.css">
+
+    <link rel="shortcut icon" href="img/favicon.png">
+
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/scripts.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.1.3/ace.js">
+    </script>
+</head>
+
+<body onload="showNextInstruction()">
+    <br>
+    <br>
+    <p class="text-center">GMDSP Simple Sparql Walkthrough.</p>
+    <br>
+    <div class="container">
+        <div class="row clearfix">
+            <div class="col-md-12 column">
+                <div class="row clearfix">
+                    <div class="col-md-4 column">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                            <h3 id="instructionTitle" class="panel-title"></h3>
+                            </div>
+                            <div id="instructionText" class="panel-body">
+                            </div>
+                        </div>
+                        <button onclick="showNextInstruction()" type="button" class="btn btn-success btn-lg btn-block">Next...</button>
+                    </div>
+                    <div class="col-md-8 column">
+                        <div class="panel panel-default">
+                            <div style="height:300px;" class="panel-body" id="code">
+                                
+                            </div>
+                        </div>
+                        <br>
+                        <button onclick="runCode()" type="button" class="btn btn-warning btn-lg btn-block">Run</button>
+                        <br>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">The Result</h3>
+                </div>
+                <div id="result" class="panel-body">
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
