@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <title>Maps Visualisation</title>
+    <style>
+        html, body, #map-canvas {
+            height: 100%;
+            margin: 0px;
+            padding: 0px
+        }
+    </style>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script src="mapVis.js"></script>
+    <script>
+        function getLocations(map) {
+            var siteDomain = "gmdsp-staging.publishmydata.com"
+            var query = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> "
+                    + "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> "
+                    + "PREFIX light: <http://data.gmdsp.org.uk/def/council/streetlighting/> "
+                    + "PREFIX parking: <http://data.gmdsp.org.uk/def/council/parking/> "
+                    + "PREFIX locn: <http://www.w3.org/ns/locn#> "
+                    + "PREFIX geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> "
+                    + "PREFIX rec: <http://data.gmdsp.org.uk/def/council/recycling/> "
+                    + "SELECT DISTINCT ?type ?lat ?long "
+                    + "WHERE { "
+                    + "?thing locn:location ?l; "
+                    + "rdf:type ?t. "
+                    + "?t rdfs:label ?type. "
+                    + "?l locn:geometry ?g. "
+                    + "?g geo:lat ?lat; "
+                    + "geo:long ?long "
+                    + "} LIMIT 10000";
+            var url = "http://" + siteDomain + "/sparql.json?query=";
+            url += encodeURIComponent(query);
+            $.ajax({
+                dataType: 'jsonp',
+                url: url,
+                username: "guest",
+                password: "gmdsp99",
+                success: function (data) {
+                    visOnMap(data, map);
+                }
+            });
+        }
+    </script>
+</head>
+<body>
+<div id="map-canvas"></div>
+<script>
+    var map = initMap('map-canvas');
+    getLocations(map);
+</script>
+</body>
+</html>

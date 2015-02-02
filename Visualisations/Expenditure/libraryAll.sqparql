@@ -1,0 +1,11 @@
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX lib: <http://data.gmdsp.org.uk/data/trafford/libraries/loan-stats/>
+PREFIX stat: <http://statistics.data.gov.uk/doc/statistical-geography/>
+
+SELECT ?label (SUM(?loanCount) AS ?count)
+WHERE{
+	?obv lib:bookCategory ?category ;
+		lib:libraryLoan ?loanCount .
+	?category rdfs:label ?label
+}
+GROUP BY ?label

@@ -1,0 +1,22 @@
+PREFIX pay: <http://reference.data.gov.uk/def/payment#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX odc: <http://opendatacommunities.org/doc/metropolitan-district-council/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT ?label (SUM(?a) AS ?count)
+WHERE{
+    ?line rdf:type pay:ExpenditureLine ;
+        pay:payer odc:manchester ;
+        pay:netAmount ?amount ;
+        pay:payment ?payment .
+	
+	?payment pay:unit ?unit .
+	
+	?unit rdfs:label ?label
+	
+	BIND (xsd:decimal(?amount) AS ?a)
+}
+GROUP BY ?label
+ORDER BY DESC(?count)
+LIMIT 10

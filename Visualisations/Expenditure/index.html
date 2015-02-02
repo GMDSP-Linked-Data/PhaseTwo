@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset=utf-8/>
+    <script src="chart.js"></script>
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script src="chartVis.js"></script>
+    <script>
+
+        function fillChart(canvas, council) {
+            var siteDomain = "gmdsp-staging.publishmydata.com"
+            var query = "PREFIX pay: <http://reference.data.gov.uk/def/payment#> "
+                    + "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> "
+                    + "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> "
+                    + "PREFIX odc: <http://opendatacommunities.org/doc/metropolitan-district-council/> "
+                    + "PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> "
+                    + "SELECT ?unitLabel (SUM(?a) AS ?total) "
+                    + "WHERE{ "
+                    + "?line rdf:type pay:ExpenditureLine ; "
+                    + "pay:payer odc:" + council + " ; "
+                    + "pay:netAmount ?amount ; "
+                    + "pay:payment ?payment . "
+                    + "?payment pay:unit ?unit . "
+                    + "?unit rdfs:label ?unitLabel "
+                    + "BIND (xsd:decimal(?amount) AS ?a) "
+                    + "} "
+                    + "GROUP BY ?unitLabel "
+                    + "ORDER BY DESC(?total) "
+                    + "LIMIT 10 "
+
+
+            var url = "http://" + siteDomain + "/sparql.json?query=";
+            url += encodeURIComponent(query);
+            $.ajax({
+                dataType: 'jsonp',
+                url: url,
+                username: "guest",
+                password: "gmdsp99",
+                success: function (data) {
+                    visChart(data, canvas);
+                }
+            });
+        }
+    </script>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body align="center">
+<h1>GMDSP - Expenditure Visualization</h1>
+<table style="margin-left:auto; margin-right:auto;">
+    <tr>
+        <td>
+            <canvas id="chartOne" width="400" height="400"></canvas>
+        </td>
+        <td>
+            <canvas id="chartTwo" width="400" height="400"></canvas>
+        </td>
+    </tr>
+    <tr>
+        <td align="center">
+            <select id="selectOne" onchange="fillChart(getCanvas('chartOne'), this.value)">
+                <option value="manchester">Manchester</option>
+                <option value="stockport">Stockport</option>
+                <option value="tameside">Tameside</option>
+                <option value="trafford">Trafford</option>
+            </select>
+        </td>
+        <td align="center">
+            <select id="selectTwo" onchange="fillChart(getCanvas('chartTwo'), this.value)">
+                <option value="manchester">Manchester</option>
+                <option value="stockport">Stockport</option>
+                <option value="tameside">Tameside</option>
+                <option value="trafford">Trafford</option>
+            </select>
+        </td>
+    </tr>
+</table>
+<script>
+    $("#selectOne").val("manchester");
+    fillChart(getCanvas("chartOne"), "manchester");
+    $("#selectTwo").val("tameside");
+    fillChart(getCanvas("chartTwo"), "tameside");
+</script>
+</body>
+</html>

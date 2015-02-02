@@ -1,0 +1,11 @@
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX lib: <http://data.gmdsp.org.uk/data/trafford/libraries/loan-stats/>
+PREFIX stat: <http://statistics.data.gov.uk/doc/statistical-geography/>
+
+SELECT ?label ?count
+WHERE{
+	?obv lib:refArea stat:E05000836 ;
+		lib:bookCategory ?category ;
+		lib:libraryLoan ?count .
+	?category rdfs:label ?label
+}

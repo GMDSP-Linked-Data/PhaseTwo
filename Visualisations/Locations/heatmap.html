@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <title>Maps Visualisation</title>
+    <style>
+        html, body, #map-canvas {
+            height: 100%;
+            margin: 0px;
+            padding: 0px
+        }
+    </style>
+    <script src="https://maps.googleapis.com/maps/api/js?libraries=visualization&sensor=true_or_false"></script>
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script src="jscoord-1.1.1.js"></script>
+    <script src="mapVis.js"></script>
+    <script>
+        function getLocations(map) {
+            var siteDomain = "gmdsp-staging.publishmydata.com"
+            var query = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> "
+                    + "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> "
+                    + "PREFIX fire: <http://data.gmdsp.org.uk/def/fire-and-rescue/> "
+                    + "PREFIX spatial: <http://data.ordnancesurvey.co.uk/ontology/spatialrelations/> "
+                    + "SELECT ?northing ?easting "
+                    + "WHERE { "
+                    + "?incident rdf:type fire:Incident; "
+                    + "fire:incidentLocation ?location. "
+                    + "?location spatial:northing ?northing; "
+                    + "spatial:easting ?easting "
+                    + "} ";
+            var url = "http://" + siteDomain + "/sparql.json?query=";
+            url += encodeURIComponent(query);
+            $.ajax({
+                dataType: 'jsonp',
+                url: url,
+                username: "guest",
+                password: "gmdsp99",
+                success: function (data) {
+                    heatMap(data, map);
+                }
+            });
+        }
+    </script>
+</head>
+<body>
+<div id="map-canvas"></div>
+<script>
+    var map = initMap('map-canvas');
+    getLocations(map);
+</script>
+</body>
+</html>
