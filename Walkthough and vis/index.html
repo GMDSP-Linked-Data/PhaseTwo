@@ -124,9 +124,13 @@
         resultBox.innerHTML = tableString;
     }
 	
-	function prepVisualisation(){
+	function clearVisualisation(){
 		var visDiv = document.getElementById('visDiv');
 		visDiv.innerHTML = "";
+	}
+	
+	function prepVisualisation(){
+		clearVisualisation();
 		if(!instructionArray[instructionCounter].vis){
 			return;
 		} else {
@@ -142,6 +146,7 @@
 	}
 	
 	function drawVisualisation(data){
+		prepVisualisation();
 		if(!instructionArray[instructionCounter].vis){
 			return;
 		} else {
@@ -198,9 +203,9 @@
                 title.innerHTML = instructionArray[instructionCounter].title;
             }  
             instruction.innerHTML = instructionArray[instructionCounter].text;
-			
-			prepVisualisation();
             
+			clearVisualisation();
+			
             var editor = ace.edit("code");
             editor.setTheme("ace/theme/monokai");
             editor.resize()
