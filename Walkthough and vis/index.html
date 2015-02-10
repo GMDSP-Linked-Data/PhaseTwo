@@ -12,8 +12,32 @@
 <script>
     var baseURL = "http://data.gmdsp.org.uk/sparql.json??utf8=%E2%9C%93&query=";
     var backBtn = '<button onclick = "showPreviousInstruction()" type="button" class="btn btn-default btn-sml"><span class="glyphicon glyphicon-circle-arrow-left" aria-hidden="true"></span></button>';
+	var map;
+	var chart;
     var instructionCounter = -1;
-    var instructionArray = [{
+	var instructionArray = [{
+            title: 'Welcome',
+            text: 'This web application is designed to give you a simple hands on intro to using sparql to access GMDSP data. <br><br> The application will attempt to explain some simple Sparql queries to you, and allow you to edit them in the window on the right, helping you understand how they work.<br><br>Press next to continue...',
+            code: 'Your code will go here!'
+        }, {
+            title: 'Federated volunteering query',
+            text: 'Visualise ward locations with volunteering statistics.',
+            code: 'PREFIX owl: <http://www.w3.org/2002/07/owl#> \nPREFIX qb: <http://purl.org/linked-data/cube#> \nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> \nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> \nPREFIX prop: <http://data.gmdsp.org.uk/data/manchester/volunteers/stats/ward/prop/> \nPREFIX stats: <http://data.gmdsp.org.uk/data/manchester/volunteers/stats/> \nPREFIX tff: <http://reference.data.gov.uk/id/government-half/2014-2015/> \nPREFIX geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> \nSELECT DISTINCT ?count ?label ?lat ?long \nWHERE { \n	?obv rdf:type qb:Observation ; \n		qb:dataSet stats:ward ; \n		prop:period tff:Q1 ; \n		prop:area ?ward ; \n		prop:count ?count . \n	?ward owl:sameAs ?ordRef . \n	SERVICE <http://data.ordnancesurvey.co.uk/datasets/os-linked-data/apis/sparql> { \n        ?ordRef rdfs:label ?label ; \n			geo:lat ?lat ; \n			geo:long ?long .		 \n    } \n} \nLIMIT 50 \n',
+			vis: "loc"
+        }, {
+            title: 'Everything with a location',
+            text: 'Heatmap of everything with an locn.',
+            code: 'PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> \nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> \nPREFIX locn: <http://www.w3.org/ns/locn#> \nPREFIX geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> \nSELECT DISTINCT ?type ?lat ?long \nWHERE { \n	?thing locn:location ?l; \n		rdf:type ?t. \n	?t rdfs:label ?type. \n	?l locn:geometry ?g. \n	?g geo:lat ?long; \n		geo:long ?lat \n} LIMIT 10000',
+			vis: "heat"
+        }, {
+            title: 'Expenditure categories',
+            text: 'Pie chart of top 10 expenditure units for Manchester',
+            code: 'PREFIX pay: <http://reference.data.gov.uk/def/payment#> \nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> \nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> \nPREFIX odc: <http://opendatacommunities.org/doc/metropolitan-district-council/> \nPREFIX xsd: <http://www.w3.org/2001/XMLSchema#> \nSELECT ?label (SUM(?a) AS ?count) \nWHERE{ \n    ?line rdf:type pay:ExpenditureLine ; \n        pay:payer odc:manchester ; \n        pay:netAmount ?amount ; \n        pay:payment ?payment . \n	?payment pay:unit ?unit . \n	?unit rdfs:label ?label \n	BIND (xsd:decimal(?amount) AS ?a) \n} \nGROUP BY ?label \nORDER BY DESC(?count) \nLIMIT 10',
+			vis: "pie"
+        }
+	];
+	
+    /*var instructionArray = [{
             title: 'Welcome',
             text: 'This web application is designed to give you a simple hands on intro to using sparql to access GMDSP data. <br><br> The application will attempt to explain some simple Sparql queries to you, and allow you to edit them in the window on the right, helping you understand how they work.<br><br>Press next to continue...',
             code: 'Your code will go here!'
@@ -32,7 +56,6 @@
             title: 'Variables',
             text: 'Variables are values that change. In sparql we refer to variables with a ?. In this example, ?lat is a variable',
             code: 'PREFIX geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> \n \n ?lat'
-
         },
 
         {
@@ -58,7 +81,8 @@
         }, {
             title: 'Doing something useful',
             text: 'Take a look at this simple query. It may look complicated at first but it is quite simple. We have our prefix definitions for URIs, our SELECT and WHERE statements, and our variables. This statement is should return the borough of incidents of type fire, where the property was a car. location, ward, borough northing and easting can be variable. Try running this query',
-            code: 'PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nPREFIX fire: <http://data.gmdsp.org.uk/def/fire-and-rescue/>\nPREFIX ord: <http://data.ordnancesurvey.co.uk/ontology/spatialrelations/>\nPREFIX ptype: <http://data.gmdsp.org.uk/def/fire-and-rescue/property-type/>\n\nSELECT  ?borough \n\nWHERE {\n?incident rdf:type fire:Incident.\n?incident fire:propertyType ptype:car.\n?incident fire:incidentLocation ?location.\n?location fire:wardName ?ward.\n?location fire:borough ?borough.\n?location ord:northing ?northing.\n?location ord:easting ?easting\n}\nLIMIT 100\n'
+            code: 'PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nPREFIX fire: <http://data.gmdsp.org.uk/def/fire-and-rescue/>\nPREFIX ord: <http://data.ordnancesurvey.co.uk/ontology/spatialrelations/>\nPREFIX ptype: <http://data.gmdsp.org.uk/def/fire-and-rescue/property-type/>\n\nSELECT  ?borough \n\nWHERE {\n?incident rdf:type fire:Incident.\n?incident fire:propertyType ptype:car.\n?incident fire:incidentLocation ?location.\n?location fire:wardName ?ward.\n?location fire:borough ?borough.\n?location ord:northing ?northing.\n?location ord:easting ?easting\n}\nLIMIT 100\n',
+			vis: "draw stuff"
 
         }, {
             title: 'The all *',
@@ -76,7 +100,7 @@
             code: 'PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nPREFIX fire: <http://data.gmdsp.org.uk/def/fire-and-rescue/>\nPREFIX ord: <http://data.ordnancesurvey.co.uk/ontology/spatialrelations/>\nPREFIX ptype: <http://data.gmdsp.org.uk/def/fire-and-rescue/property-type/>\n\nSELECT ?easting ?northing\n\nWHERE {\n?incident rdf:type fire:Incident.\n?incident fire:propertyType ptype:car.\n?incident fire:incidentLocation ?location.\n?location fire:wardName ?ward.\n?location fire:borough "WIGAN".\n?location ord:northing ?northing.\n?location ord:easting ?easting\n}\nLIMIT 100\n'
 
         },
-    ];
+    ];*/
 
     function drawResultsTable(results){
         var resultBox = document.getElementById('result');
@@ -89,9 +113,8 @@
             tableString += '<th>'+headingsArray[i]+'</th>'
         }
         tableString += '</tr></thead>';
-        for(x=0;x<nRows;x++){
+        for(x=0;(x<nRows && x<100);x++){
             tableString += '<tr>';
-            console.log(results.results.bindings[x])
                 for(var propertyName in results.results.bindings[x]) {
                     tableString += '<td>'+results.results.bindings[x][propertyName].value+'</td>';
                 }
@@ -99,7 +122,39 @@
         }
         tableString += '</table>';
         resultBox.innerHTML = tableString;
-    } 
+    }
+	
+	function prepVisualisation(){
+		var visDiv = document.getElementById('visDiv');
+		visDiv.innerHTML = "";
+		if(!instructionArray[instructionCounter].vis){
+			return;
+		} else {
+			var vis = instructionArray[instructionCounter].vis;
+			if(vis == "loc" || vis == "heat"){
+				visDiv.innerHTML = '<div id="map-canvas"></div>';
+				map = initMap('map-canvas');
+			} else if(vis == "pie"){
+				visDiv.innerHTML = '<canvas id="chart-canvas" width="400" height="400"></canvas>';
+				chart = getCanvas('chart-canvas');
+			}
+		}
+	}
+	
+	function drawVisualisation(data){
+		if(!instructionArray[instructionCounter].vis){
+			return;
+		} else {
+			var vis = instructionArray[instructionCounter].vis;
+			if(vis == "loc"){
+				locVis(data, map);
+			} else if(vis == "heat"){
+				heatVis(data, map);
+			} else if(vis == "pie"){
+				chartVis(data, chart);
+			}
+		}
+	}
 
     function runCode() {
         var resultBox = document.getElementById('result');
@@ -112,8 +167,8 @@
             success: function(data) {
                 console.log(data)
                 var map = window.map;
-                drawResultsTable(data)
-                heatMap(data,map)
+                drawResultsTable(data);
+				drawVisualisation(data);
             },
             error: function(data) {
                 resultBox.innerHTML = JSON.stringify(data, null, 4);
@@ -143,6 +198,8 @@
                 title.innerHTML = instructionArray[instructionCounter].title;
             }  
             instruction.innerHTML = instructionArray[instructionCounter].text;
+			
+			prepVisualisation();
             
             var editor = ace.edit("code");
             editor.setTheme("ace/theme/monokai");
@@ -177,6 +234,8 @@
     <script src="https://maps.googleapis.com/maps/api/js?libraries=visualization&sensor=true_or_false"></script>
     <script src="js/mapVis.js"></script>
     <script src="js/jscoord.js"></script>
+    <script src="js/chart.js"></script>
+    <script src="js/chartVis.js"></script>
 
     <script type="text/javascript" src="js/jquery.min.js"></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
@@ -228,14 +287,10 @@
                     </div>
                 </div>
                 <div class="col-md-6 column">
-                   <div id="map-canvas">
+                   <div id="visDiv">
                        
                    </div>
                 </div>
             </div>
-            <script>
-            window.map = initMap('map-canvas');
-            </script>
-
     </body>
 </html>
