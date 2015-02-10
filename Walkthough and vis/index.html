@@ -1,14 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
+<link href='http://fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet' type='text/css'>
 <style>
+.header{
+    font-family: 'Varela Round', sans-serif;
+    color:rgb(150,150,150);
+    font-size: 1.3em;
+    text-align:justify;
+}
 #map-canvas{
     width:100%;
     height:400px;
     margin-bottom: 30px;
-    background-color: red;
 }
-</style>
 
+.fix-height{
+    min-height:322px;
+}
+.logo{
+    width:200px;
+    margin:10px;
+}
+
+
+</style>
 <script>
     var baseURL = "http://data.gmdsp.org.uk/sparql.json??utf8=%E2%9C%93&query=";
     var backBtn = '<button onclick = "showPreviousInstruction()" type="button" class="btn btn-default btn-sml"><span class="glyphicon glyphicon-circle-arrow-left" aria-hidden="true"></span></button>';
@@ -19,16 +34,59 @@
             title: 'Welcome',
             text: 'This web application is designed to give you a simple hands on intro to using sparql to access GMDSP data. <br><br> The application will attempt to explain some simple Sparql queries to you, and allow you to edit them in the window on the right, helping you understand how they work.<br><br>Press next to continue...',
             code: 'Your code will go here!'
+        }, 
+        {
+            title: 'Getting Started',
+            text: 'SPARQL - or SPARQL Protocol and RDF Query Language, is a "semantic" language used for making queries on databases with data stored in the RDF (Resource Description Framework) format.<br><br> Sparql queries are entered at a SPARQL endpoint. One sparql endpoint for GMDSP data is the dark box on the right - however sparql endpoints exist at other places, such as here: http://dbpedia.org/sparql, for querying the DBPedia database.',
+            code: ''
+        },
+        {
+            title: 'URIs',
+            text: 'URIs or Uniform Resource Identifiers identify a unique resource. In sparql we can use things called prefix definitions to abbriviate URIs. For example, with the code on the right, we are telling sparql that the uri PREFIX geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> should be refered to by geo.',
+            code: 'PREFIX geo: <http://www.w3.org/2003/01/geo/wgs84_pos#>'
+
+        },
+        {
+            title: 'Variables',
+            text: 'Variables are values that change. In sparql we refer to variables with a ?. In this example, ?lat is a variable',
+            code: 'PREFIX geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> \n \n ?lat'
+        },
+
+        {
+            title: 'Literals',
+            text: 'Literals are values that stay the same. In sparql we refer to literals with "". In this example, "England" is a literal',
+            code: 'PREFIX geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> \n \n ?lat \n \n "England"'
+
+        }, 
+        {
+            title: 'SELECT',
+            text: 'The SELECT command tells Sparql what to select from the database. This is useful since we do not always need to see everything! In this example we are telling sparql to select on the latitude',
+            code: ' \n SELECT ?lat'
+
         }, {
+            title: 'WHERE',
+            text: 'The WHERE command tells Sparql which conditions need to be met to select a tuple.',
+            code: '\nWHERE { \n?rec rdf:type \nrec:RecyclingSite. \n?rec geo:lat ?lat. \n?rec geo:long ?long \n}'
+
+        }, 
+        {
+            title: 'Doing something useful',
+            text: 'You can try and press run at this stage, and you will see in the results box below that you get an error!<br>This is because we have not yet told sparql to do anything useful. We need to use a combination of URIs variables and literals along with some other statements to do anything useful',
+            code: 'PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nPREFIX rec: <http://data.gmdsp.org.uk/def/council/recycling/>\nPREFIX geo: <http://www.w3.org/2003/01/geo/wgs84_pos#>\nSELECT ?lat ?long \nWHERE {\n?rec rdf:type rec:RecyclingSite.\n?rec geo:lat ?lat.\n?rec geo:long ?long\n}\n',
+            vis: "loc"
+        },
+        {
+            title: 'Everything with a location',
+            text: 'This query will return everything with a location. Obviousy, this will be a lot of stuff, so we can use the LIMIT statement followed by a number to limit the number of results that are returned.\n Also notice the DISTINCT statement at the top. This tells sparql that we do not want to select duplicates.',
+            code: 'PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> \nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> \nPREFIX locn: <http://www.w3.org/ns/locn#> \nPREFIX geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> \nSELECT DISTINCT ?type ?lat ?long \nWHERE { \n    ?thing locn:location ?l; \n     rdf:type ?t. \n ?t rdfs:label ?type. \n ?l locn:geometry ?g. \n ?g geo:lat ?long; \n        geo:long ?lat \n} LIMIT 10000',
+            vis: "heat"
+        }, 
+
+        {
             title: 'Federated volunteering query',
             text: 'Visualise ward locations with volunteering statistics.',
             code: 'PREFIX owl: <http://www.w3.org/2002/07/owl#> \nPREFIX qb: <http://purl.org/linked-data/cube#> \nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> \nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> \nPREFIX prop: <http://data.gmdsp.org.uk/data/manchester/volunteers/stats/ward/prop/> \nPREFIX stats: <http://data.gmdsp.org.uk/data/manchester/volunteers/stats/> \nPREFIX tff: <http://reference.data.gov.uk/id/government-half/2014-2015/> \nPREFIX geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> \nSELECT DISTINCT ?count ?label ?lat ?long \nWHERE { \n	?obv rdf:type qb:Observation ; \n		qb:dataSet stats:ward ; \n		prop:period tff:Q1 ; \n		prop:area ?ward ; \n		prop:count ?count . \n	?ward owl:sameAs ?ordRef . \n	SERVICE <http://data.ordnancesurvey.co.uk/datasets/os-linked-data/apis/sparql> { \n        ?ordRef rdfs:label ?label ; \n			geo:lat ?lat ; \n			geo:long ?long .		 \n    } \n} \nLIMIT 50 \n',
 			vis: "loc"
-        }, {
-            title: 'Everything with a location',
-            text: 'Heatmap of everything with an locn.',
-            code: 'PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> \nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> \nPREFIX locn: <http://www.w3.org/ns/locn#> \nPREFIX geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> \nSELECT DISTINCT ?type ?lat ?long \nWHERE { \n	?thing locn:location ?l; \n		rdf:type ?t. \n	?t rdfs:label ?type. \n	?l locn:geometry ?g. \n	?g geo:lat ?long; \n		geo:long ?lat \n} LIMIT 10000',
-			vis: "heat"
         }, {
             title: 'Expenditure categories',
             text: 'Pie chart of top 10 expenditure units for Manchester',
@@ -102,6 +160,13 @@
         },
     ];*/
 
+
+    //give it a html element and it'll append a spinner
+    function showSpinner(el){
+        var spinner = '<img class="img-responsive center-block" src="img/spinner.gif"></img>';
+        el.append(spinner)
+    }
+
     function drawResultsTable(results){
         var resultBox = document.getElementById('result');
         resultBox.innerHTML = "";
@@ -157,8 +222,11 @@
 	}
 
     function runCode() {
-        var resultBox = document.getElementById('result');
-        resultBox.innerHTML = "";
+        prepVisualisation();
+        var resultBox = document.getElementById('resultsDiv');
+        resultBox.innerHTML =  '<div class="panel panel-default"><div class="panel-heading"><h3 class="panel-title">The Result</h3></div> <div id="result" class="panel-body"></div></div>';
+
+        showSpinner($('#result'))
         var query = ace.edit("code").getSession().getValue();
         var encodedQuery = encodeURIComponent(query);
         var requestURL = baseURL + encodedQuery;
@@ -180,12 +248,21 @@
         if (instructionCounter > 0) {
             instructionCounter = instructionCounter - 1;
             drawInstructions();
+            var resultBox = document.getElementById('resultsDiv');
+            resultBox.innerHTML = ''
+            var resultBox = document.getElementById('visDiv');
+            visDiv.innerHTML = ''
         }         
     }
 
     function showNextInstruction() {
         instructionCounter++;
         drawInstructions();
+        var resultBox = document.getElementById('resultsDiv');
+        resultBox.innerHTML = ''
+        var resultBox = document.getElementById('visDiv');
+        visDiv.innerHTML = ''
+
     }
 
     function drawInstructions(){
@@ -199,7 +276,6 @@
             }  
             instruction.innerHTML = instructionArray[instructionCounter].text;
 			
-			prepVisualisation();
             
             var editor = ace.edit("code");
             editor.setTheme("ace/theme/monokai");
@@ -211,6 +287,8 @@
         } else {
             title.innerHTML = backBtn+' '+"Well done";
             instruction.innerHTML = "You have completed the introduction, if you have any questions, please contact me at jamesr.gallagher1@gmail.com";
+            var editor = ace.edit("code");
+            editor.getSession().setValue('Well done :)');
         }
     }
 </script>
@@ -245,16 +323,15 @@
 </head>
 
 <body onload="showNextInstruction()">
-    <br>
-    <br>
-    <p class="text-center">GMDSP Simple Sparql Walkthrough.</p>
+
     <br>
     <div class="container">
+        <p class="text-left header"><img class="logo align-left"src="img/GMDSP_Logo_Full_text_RGB1.png"></img>Simple Sparql Walkthrough</p>
         <div class="row clearfix">
             <div class="col-md-12 column">
                 <div class="row clearfix">
-                    <div class="col-md-4 column">
-                        <div class="panel panel-default">
+                    <div class="col-md-4 column fix-height">
+                        <div class="panel panel-default fix-height ">
                             <div class="panel-heading">
                             <h3 id="instructionTitle" class="panel-title"></h3>
                             </div>
@@ -265,11 +342,11 @@
                     </div>
                     <div class="col-md-8 column">
                         <div class="panel panel-default">
-                            <div style="height:300px;" class="panel-body" id="code">
+                            <div style="min-height:322px;" class="panel-body" id="code">
                                 
                             </div>
                         </div>
-                        <br>
+                        
                         <button onclick="runCode()" type="button" class="btn btn-warning btn-lg btn-block">Run</button>
                         <br>
                     </div>
@@ -277,14 +354,8 @@
             </div>
             <br>
             <div class="row clearfix">
-                <div class="col-md-6 column">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h3 class="panel-title">The Result</h3>
-                        </div>
-                        <div id="result" class="panel-body">
-                        </div>
-                    </div>
+                <div class="col-md-6 column" id="resultsDiv">
+                   
                 </div>
                 <div class="col-md-6 column">
                    <div id="visDiv">
@@ -294,3 +365,6 @@
             </div>
     </body>
 </html>
+
+
+
