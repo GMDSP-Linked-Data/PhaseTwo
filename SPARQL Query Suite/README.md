@@ -38,6 +38,17 @@ WHERE {
 LIMIT 100
 ```
 
+This query should return results similar to;
+
+no|allotmentLabel|streetAddress
+---|---|---
+1|Pleasant Street allotments|Pleasant Street
+2|Caythorpe Street allotments|Caythorpe Street
+3|Woodhouse Park allotments|Maisemore Road
+4|Alexandra Road South allotments|Alexandra Road South
+5|Sharston allotments|Stancliffe Road
+...|...|...
+
 ### Other ways to query
 Details of how to query the data store using javascript can be found [here](http://data.gmdsp.org.uk/docs#json-p).
 
