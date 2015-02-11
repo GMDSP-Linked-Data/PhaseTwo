@@ -2,13 +2,31 @@
 
 This document covers how to create some basic visualisations using GMDSP data. All necessary javascript code is contained within the folder **/js**.
 
-### Location
-This visualisation makes use of the [Google Map API](https://developers.google.com/maps/) and plots the location of items on a map.
+### Querying the data
+Details of how to query the data store using javascript can be found [here](http://data.gmdsp.org.uk/docs#json-p).
 
-To use include the Google Maps API and js/mapVis.js in your page;
+e.g. utilising [JQuery](http://jquery.com/)
+```javascript
+queryUrl = 'http://data.gmdsp.org.uk/sparql.json?query=SELECT+%2A+WHERE+%7B%3Fs+%3Fp+%3Fo%7D+LIMIT+10'
+
+$.ajax({
+	dataType: 'jsonp',
+	url: queryUrl,
+	success: function(data) {
+		// callback code here
+		alert('success!');
+	}
+});
+```
+
+### Location Visualisation
+This visualisation makes use of the [Google Map API](https://developers.google.com/maps/) and the [JSCoord](http://www.jstott.me.uk/jscoord/) library plots the location of items on a map.
+
+To use include the [Google Map API](https://developers.google.com/maps/), [JSCoord](http://www.jstott.me.uk/jscoord/) library and js/mapVis.js in your page;
 ```html
 <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
 <script src="js/mapVis.js"></script>
+<script src="js/jscoord.js"></script>
 ```
 
 Create a div that can be used to contain the map;
@@ -16,7 +34,7 @@ Create a div that can be used to contain the map;
 <div id="map-canvas"></div>
 ```
 
-Utilise a query such as this to find the locations of certain object
+Utilise a query such as this to find the locations of certain object;
 ```sparql
 PREFIX light: <http://data.gmdsp.org.uk/def/council/streetlighting/>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
