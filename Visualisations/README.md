@@ -133,7 +133,7 @@ chartVis(data, chart);
 
 ### Licensing
 When making use of any of these visualisations please ensure you include the appropriate licensing file for the utilised libraries;
-[JQuery](http://jquery.com/)
-[Google Map API](https://developers.google.com/maps/)
-[JSCoord](http://www.jstott.me.uk/jscoord/)
-[ChartJS](http://www.chartjs.org/)
+*[JQuery](http://jquery.com/)
+*[Google Map API](https://developers.google.com/maps/)
+*[JSCoord](http://www.jstott.me.uk/jscoord/)
+*[ChartJS](http://www.chartjs.org/)
