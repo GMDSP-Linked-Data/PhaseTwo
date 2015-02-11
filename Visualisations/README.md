@@ -5,9 +5,10 @@ This document covers how to create some basic visualisations using GMDSP data. A
 ### Location
 This visualisation makes use of the [Google Map API](https://developers.google.com/maps/) and plots the location of items on a map.
 
-To use include the Google Maps API in your page;
+To use include the Google Maps API and js/mapVis.js in your page;
 ```html
 <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
+<script src="js/mapVis.js"></script>
 ```
 
 Create a div that can be used to contain the map;
@@ -32,4 +33,10 @@ WHERE {
 		ord:easting ?easting
 }
 LIMIT 100
-```sparql
+```
+
+Finally initialise the map and hand the JSON object returned from this query to the locVis() method;
+```javascript
+var map = initMap('map-canvas');
+locVis(data, map);
+```
