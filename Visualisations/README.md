@@ -1,4 +1,5 @@
-# ![alt text](https://github.com/GMDSP-Linked-Data/PhaseTwo/blob/master/Visualisations/img/logo.png "GMDSP") Visualisations
+![alt text](https://github.com/GMDSP-Linked-Data/PhaseTwo/blob/master/Visualisations/img/logo.png "GMDSP")
+# Visualisations
 
 This document covers how to create some basic visualisations using GMDSP data. All necessary javascript code is contained within the folder **/js**.
 
