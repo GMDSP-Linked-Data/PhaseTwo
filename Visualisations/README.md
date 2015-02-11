@@ -7,6 +7,6 @@ This visualisation makes use of the [Google Map API](https://developers.google.c
 
 To use include the Google Maps API in your page;
 
-```javascript
+```html
 <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
 ```
