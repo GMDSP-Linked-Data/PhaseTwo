@@ -42,6 +42,7 @@ LIMIT 50
 ```
 
 This query can be run on [GMDSP's SPARQL endpoint](http://data.gmdsp.org.uk/sparql) and should return results akin to this;
+
 no|count|label|lat|long
 ---|---|---|---|---
 1|7|Ancoats and Clayton|53.486556|-2.187806
