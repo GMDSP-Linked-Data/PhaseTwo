@@ -83,7 +83,7 @@
         },
         {
             title: 'Doing something useful',
-            text: 'Take a look at this query, you can see it is made up of a SELECT, a WHERE and URIS. You can run this and see that it will select the latitude and longitude of recycling sites.',
+            text: 'Take a look at this query, you can see it is made up of a SELECT, a WHERE and URIs. You can run this and see that it will select the latitude and longitude of recycling sites.',
             code: 'PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nPREFIX rec: <http://data.gmdsp.org.uk/def/council/recycling/>\nPREFIX geo: <http://www.w3.org/2003/01/geo/wgs84_pos#>\nSELECT ?lat ?long \nWHERE {\n?rec rdf:type rec:RecyclingSite.\n?rec geo:lat ?lat.\n?rec geo:long ?long\n}\n',
             vis: "loc"
          },
@@ -102,20 +102,20 @@
 
           {
             title: 'Doing something useful',
-            text: 'We may want to narrow down our results further. We can do this using the WHERE statement in combination with literals. Imagine we know there was a fire at 2014-06-02T00:20 - fire:incidentRecordStartTimestamp ?time in the WHERE statement, replacing the ?time variable with a literal value "2014-06-02T00:20" and see what you can find out.',
+            text: 'We may want to narrow down our results further. We can do this using the WHERE statement in combination with literals. Imagine we know there was a fire at 2014-06-02T00:20 - Look at the line fire:incidentRecordStartTimestamp ?time in the WHERE statement, and try replacing the ?time variable with a literal value "2014-06-02T00:20" and see what you can find out.',
             code: 'PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX fire: <http://vocab.resc.info/incident#>\nPREFIX locn: <http://www.w3.org/ns/locn#>\nPREFIX spatial: <http://data.ordnancesurvey.co.uk/ontology/spatialrelations/>\nSELECT ?fullAddress ?time\nWHERE {?incident rdf:type fire:IncidentRecord ;\nfire:incidentRecordStartTimestamp ?time ;\nlocn:location ?location .\n?location locn:address ?address .\n?address locn:fullAddress ?fullAddress\n}\nORDER BY \n?time\nLIMIT 100',
             vis: "loc"
         },
 
           {
             title: 'Doing something useful',
-            text: 'This is useful if we know exactly when an incident was, but what if we want to know about all the incidents since a time.\n For this we can use thr FILTER. Take a look at this example\n FILTER (?time < "2014-06-02T01:37") tells us to take the incidents since the 02/02/2014 at 01:37',
+            text: 'This is useful if we know exactly when an incident was, but what if we want to know about all the incidents since a time.\n For this we can use the FILTER. Take a look at this example.<br> FILTER (?time < "2014-06-02T01:37") tells us to take the incidents before the 02/02/2014 at 01:37',
             code: 'PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX fire: <http://vocab.resc.info/incident#>\nPREFIX locn: <http://www.w3.org/ns/locn#>\nPREFIX spatial: <http://data.ordnancesurvey.co.uk/ontology/spatialrelations/>\nSELECT ?fullAddress ?time\nWHERE {?incident rdf:type fire:IncidentRecord ;\nfire:incidentRecordStartTimestamp ?time ;\nlocn:location ?location .\n?location locn:address ?address .\n?address locn:fullAddress ?fullAddress\n FILTER (?time < "2014-06-02T01:37")\n}\nORDER BY \n?time\nLIMIT 100',
             vis: "loc"
         },
            {
             title: 'Going forward',
-            text: 'Take a look at the next 3 queries of increasing complexity. the should build on what you know. Take time to fiddle with, and feel free to refer back to previous examles!',
+            text: 'Take a look at the next 3 queries of increasing complexity. the should build on what you know. Take time to fiddle with them, and feel free to refer back to previous examles!',
             code: 'Good Luck!'
             
         },
