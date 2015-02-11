@@ -1,3 +1,5 @@
+#Retrieve the number of volunteers for each ward in 2014-2015/Q1 and then query ordnance survey to find the centre point of each ward.
+
 PREFIX owl: <http://www.w3.org/2002/07/owl#>
 PREFIX qb: <http://purl.org/linked-data/cube#>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>

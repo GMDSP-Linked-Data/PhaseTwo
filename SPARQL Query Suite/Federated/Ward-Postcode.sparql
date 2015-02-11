@@ -1,0 +1,16 @@
+#Find the postcodes within a Ancoats and Clayton (id=7000000000042541).
+
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX ord: <http://data.ordnancesurvey.co.uk/id/>
+PREFIX post: <http://data.ordnancesurvey.co.uk/ontology/postcode/>
+
+SELECT DISTINCT ?postcode
+WHERE {
+	SERVICE <http://data.ordnancesurvey.co.uk/datasets/os-linked-data/apis/sparql> {
+		?pcu rdf:type post:PostcodeUnit ;
+			post:ward ord:7000000000042541 .
+		?pcu rdfs:label ?postcode .
+	}
+}
+LIMIT 50

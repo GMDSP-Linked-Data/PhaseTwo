@@ -1,10 +1,7 @@
-Retrieve each ward from GMDSP i.e. http://gmdsp-staging.publishmydata.com/resource?uri=http%3A%2F%2Fopendatacommunities.org%2Fdoc%2Fgeography%2Fadministration%2Fwd%2FE05000687
-
-For each ward follow link to ordnance survey to retrieve post codes in ward i.e. http://data.ordnancesurvey.co.uk/doc/7000000000042541
-
-For each post code look up the post code unit on open data communities i.e. http://opendatacommunities.org/resource?uri=http%3A%2F%2Fdata.ordnancesurvey.co.uk%2Fid%2Fpostcodeunit%2FTA219HB
-
-Each postcode unit should have LSOA so it can be retrieved.
+#Retrieve each ward from GMDSP i.e. http://gmdsp-staging.publishmydata.com/resource?uri=http%3A%2F%2Fopendatacommunities.org%2Fdoc%2Fgeography%2Fadministration%2Fwd%2FE05000687
+#For each ward follow link to ordnance survey to retrieve post codes in ward i.e. http://data.ordnancesurvey.co.uk/doc/7000000000042541
+#For each post code look up the post code unit on open data communities i.e. http://opendatacommunities.org/resource?uri=http%3A%2F%2Fdata.ordnancesurvey.co.uk%2Fid%2Fpostcodeunit%2FTA219HB
+#Each postcode unit should have LSOA so it can be retrieved.
 
 PREFIX owl: <http://www.w3.org/2002/07/owl#>
 PREFIX qb: <http://purl.org/linked-data/cube#>

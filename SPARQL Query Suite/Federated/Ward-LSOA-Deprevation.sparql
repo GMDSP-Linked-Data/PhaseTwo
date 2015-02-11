@@ -1,0 +1,27 @@
+#Find the post codes for Ancoats and Clayton then use this to find the LSOAs (Lower Super Output Areas) and find the indices of multiple deprivation score for 2012.
+
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX time: <http://opendatacommunities.org/def/ontology/time/>
+PREFIX year: <http://reference.data.gov.uk/id/year/>
+PREFIX geoO: <http://opendatacommunities.org/def/geography#>
+PREFIX geoOs: <http://opendatacommunities.org/def/ontology/geography/>
+PREFIX post: <http://data.ordnancesurvey.co.uk/ontology/postcode/>
+PREFIX dep: <http://opendatacommunities.org/def/ontology/societal-wellbeing/deprivation/>
+PREFIX ord: <http://data.ordnancesurvey.co.uk/id/>
+
+SELECT DISTINCT ?lsoaLabel ?score
+WHERE {
+	SERVICE <http://data.ordnancesurvey.co.uk/datasets/os-linked-data/apis/sparql> {
+		?pcu rdf:type post:PostcodeUnit ;
+			post:ward ord:7000000000042541 .
+		SERVICE <http://opendatacommunities.org/sparql>{
+			?pcu geoO:lsoa ?lsoa .
+			?lsoa rdfs:label ?lsoaLabel .
+			?obv time:refPeriod year:2010 ;
+				geoOs:refArea ?lsoa ;
+				dep:imdScore ?score .
+		}			
+	}
+}
+ORDER BY ?lsoaLabel
