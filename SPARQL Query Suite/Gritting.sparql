@@ -1,0 +1,13 @@
+#Find the location of grit bins.
+
+PREFIX grit: <http://data.gmdsp.org.uk/def/council/gritting/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX ord: <http://data.ordnancesurvey.co.uk/ontology/spatialrelations/>
+SELECT ?northing ?easting
+WHERE {
+	?bin rdf:type grit:Gritbin ;
+		ord:northing ?northing ;
+		ord:easting ?easting
+}
+LIMIT 100

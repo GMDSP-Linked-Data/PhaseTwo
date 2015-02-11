@@ -1,0 +1,17 @@
+#Find the location and wattage of street lights.
+
+PREFIX light: <http://data.gmdsp.org.uk/def/council/streetlighting/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX locn: <http://www.w3.org/ns/locn#>
+PREFIX ord: <http://data.ordnancesurvey.co.uk/ontology/spatialrelations/>
+SELECT ?wattage ?northing ?easting
+WHERE {
+	?light rdf:type light:Streetlight ;
+		light:wattage ?wattage ;
+		locn:location ?location .
+	?location locn:geometry ?geometry .
+	?geometry ord:northing ?northing ;
+		ord:easting ?easting
+}
+LIMIT 100

@@ -1,0 +1,14 @@
+#Find the number of properties in postcode M111AN in council tax band A.
+
+PREFIX tax: <http://data.gmdsp.org.uk/data/manchester/council-tax/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX post: <http://data.ordnancesurvey.co.uk/id/postcodeunit/>
+PREFIX band: <http://data.gmdsp.org.uk/def/council/counciltax/council-tax-bands/>
+SELECT ?count
+WHERE {
+	?obv tax:refArea post:M111AN;
+		tax:countDef ?count;
+		tax:refBand band:A
+}
+LIMIT 100

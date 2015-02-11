@@ -1,0 +1,14 @@
+#Sum up all the library loans made by category
+
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX lib: <http://data.gmdsp.org.uk/data/manchester/libraries/stats/prop/>
+PREFIX stat: <http://statistics.data.gov.uk/doc/statistical-geography/>
+
+SELECT ?categoryLabel (SUM(?loanCount) AS ?count)
+WHERE{
+	?obv lib:category ?category ;
+		lib:count ?loanCount .
+	?category rdfs:label ?categoryLabel
+}
+GROUP BY ?categoryLabel
+ORDER BY DESC(?count)

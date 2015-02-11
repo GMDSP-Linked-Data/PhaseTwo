@@ -1,0 +1,21 @@
+#List accepted advertisement consent planning applications.
+
+PREFIX plan: <http://data.gmdsp.org.uk/def/council/planning/>
+PREFIX status: <http://data.gmdsp.org.uk/def/council/planning/planning-application-status/>
+PREFIX type: <http://data.gmdsp.org.uk/def/council/planning/planning-application-type/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX vcard: <http://www.w3.org/2006/vcard/ns#>
+
+SELECT DISTINCT ?dateLabel ?address ?proposal
+WHERE {
+	?application rdf:type plan:PlanningApplication ;
+		plan:decision status:approved ;
+		plan:applicationType type:advertisement-consent ;
+		plan:proposal ?proposal ;
+		vcard:street-address ?address ;
+		plan:decisionDate ?date .
+	?date rdfs:label ?dateLabel
+}
+ORDER BY DESC(?dateLabel)
+LIMIT 100

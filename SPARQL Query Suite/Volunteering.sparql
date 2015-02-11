@@ -1,0 +1,18 @@
+#Get the number of volunteers by age group in 2014-2015/Q1
+
+PREFIX qb: <http://purl.org/linked-data/cube#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX prop: <http://data.gmdsp.org.uk/data/manchester/volunteers/stats/age/prop/>
+PREFIX stats: <http://data.gmdsp.org.uk/data/manchester/volunteers/stats/>
+PREFIX tff: <http://reference.data.gov.uk/id/government-half/2014-2015/>
+SELECT DISTINCT ?ageLabel ?count
+WHERE {
+	?obv rdf:type qb:Observation ;
+		qb:dataSet stats:age ;
+		prop:period tff:Q1 ;
+		prop:count ?count ;
+		prop:age ?age .
+	?age rdfs:label ?ageLabel
+}
+ORDER BY DESC(?count)

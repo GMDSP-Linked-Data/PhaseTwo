@@ -1,0 +1,17 @@
+#Find the address of fire incidents organised by time.
+
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX fire: <http://vocab.resc.info/incident#>
+PREFIX locn: <http://www.w3.org/ns/locn#>
+PREFIX spatial: <http://data.ordnancesurvey.co.uk/ontology/spatialrelations/>
+SELECT ?fullAddress ?time
+WHERE {
+	?incident rdf:type fire:IncidentRecord ;
+		fire:incidentRecordStartTimestamp ?time ;
+		locn:location ?location .
+	?location locn:address ?address .
+	?address locn:fullAddress ?fullAddress
+}
+ORDER BY ?time
+LIMIT 100

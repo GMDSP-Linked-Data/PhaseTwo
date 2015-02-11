@@ -1,0 +1,15 @@
+#List the details of parking site operators.
+
+PREFIX park: <http://data.gmdsp.org.uk/def/council/parking/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX ord: <http://data.ordnancesurvey.co.uk/ontology/spatialrelations/>
+PREFIX contact: <http://www.w3.org/2000/10/swap/pim/contact#>
+SELECT DISTINCT ?name ?phoneNumber
+WHERE {
+	?carpark rdf:type park:ParkingSite ;
+		park:operator ?operator .
+	?operator rdfs:label ?name ;
+		contact:phone ?phoneNumber
+}
+LIMIT 100

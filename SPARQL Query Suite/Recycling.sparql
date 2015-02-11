@@ -1,0 +1,15 @@
+#Find the address of recycling sites for cardboard.
+
+PREFIX rec: <http://data.gmdsp.org.uk/def/council/recycling/>
+PREFIX type: <http://data.gmdsp.org.uk/def/council/recycling/recycling-type/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX vcard: <http://www.w3.org/2006/vcard/ns#>
+SELECT ?streetAddress
+WHERE {
+	?site rdf:type rec:RecyclingSite ;
+		rec:recyclingType type:cardboard ;
+		vcard:hasAddress ?address .
+	?address vcard:street-address ?streetAddress
+}
+LIMIT 100

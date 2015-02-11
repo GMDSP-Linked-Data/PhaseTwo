@@ -1,0 +1,14 @@
+#Find the street address of allotments.
+
+PREFIX alt: <http://data.gmdsp.org.uk/def/council/allotment/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX vcard: <http://www.w3.org/2006/vcard/ns#>
+SELECT ?allotmentLabel ?streetAddress
+WHERE {
+	?allotment rdf:type alt:Allotment ;
+		rdfs:label ?allotmentLabel ;
+		vcard:hasAddress ?address .
+	?address vcard:street-address ?streetAddress
+}
+LIMIT 100
