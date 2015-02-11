@@ -22,6 +22,10 @@
     margin:10px;
 }
 
+.table-responsive{
+    overflow: scroll;
+}
+
 
 </style>
 <script>
@@ -72,9 +76,50 @@
         {
             title: 'Doing something useful',
             text: 'You can try and press run at this stage, and you will see in the results box below that you get an error!<br>This is because we have not yet told sparql to do anything useful. We need to use a combination of URIs variables and literals along with some other statements to do anything useful',
+            code: '\nWHERE { \n?rec rdf:type \nrec:RecyclingSite. \n?rec geo:lat ?lat. \n?rec geo:long ?long \n}'
+
+      
+
+        },
+        {
+            title: 'Doing something useful',
+            text: 'Take a look at this query, you can see it is made up of a SELECT, a WHERE and URIS. You can run this and see that it will select the latitude and longitude of recycling sites.',
             code: 'PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nPREFIX rec: <http://data.gmdsp.org.uk/def/council/recycling/>\nPREFIX geo: <http://www.w3.org/2003/01/geo/wgs84_pos#>\nSELECT ?lat ?long \nWHERE {\n?rec rdf:type rec:RecyclingSite.\n?rec geo:lat ?lat.\n?rec geo:long ?long\n}\n',
             vis: "loc"
+         },
+        {
+            title: 'Doing something useful',
+            text: 'We can change what SPARQL returns to us, by changing the SELECT statement. Take a look at this example. Try changing ?fullAddress and ?time to a *. A * represents ALL so should return us all the information relating to these points, not just the lat and long.',
+            code: '#This is a comment, it begins with a hash and is ignored by sparql\n#Find the address of fire incidents organised by time.\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX fire: <http://vocab.resc.info/incident#>\nPREFIX locn: <http://www.w3.org/ns/locn#>\nPREFIX spatial: <http://data.ordnancesurvey.co.uk/ontology/spatialrelations/>\nSELECT ?fullAddress ?time\nWHERE {?incident rdf:type fire:IncidentRecord ;\nfire:incidentRecordStartTimestamp ?time ;\nlocn:location ?location .\n?location locn:address ?address .\n?address locn:fullAddress ?fullAddress\n}\nORDER BY \n?time\nLIMIT 100',
+            vis: "loc"
+         },
+          {
+            title: 'Doing something useful',
+            text: 'In this example, also notice the ORDER BY statement, which lets us order the results.',
+            code: '#Find the address of fire incidents organised by time.\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX fire: <http://vocab.resc.info/incident#>\nPREFIX locn: <http://www.w3.org/ns/locn#>\nPREFIX spatial: <http://data.ordnancesurvey.co.uk/ontology/spatialrelations/>\nSELECT ?fullAddress ?time\nWHERE {?incident rdf:type fire:IncidentRecord ;\nfire:incidentRecordStartTimestamp ?time ;\nlocn:location ?location .\n?location locn:address ?address .\n?address locn:fullAddress ?fullAddress\n}\nORDER BY \n?time\nLIMIT 100',
+            vis: "loc"
+         },
+
+          {
+            title: 'Doing something useful',
+            text: 'We may want to narrow down our results further. We can do this using the WHERE statement in combination with literals. Imagine we know there was a fire at 2014-06-02T00:20 - fire:incidentRecordStartTimestamp ?time in the WHERE statement, replacing the ?time variable with a literal value "2014-06-02T00:20" and see what you can find out.',
+            code: 'PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX fire: <http://vocab.resc.info/incident#>\nPREFIX locn: <http://www.w3.org/ns/locn#>\nPREFIX spatial: <http://data.ordnancesurvey.co.uk/ontology/spatialrelations/>\nSELECT ?fullAddress ?time\nWHERE {?incident rdf:type fire:IncidentRecord ;\nfire:incidentRecordStartTimestamp ?time ;\nlocn:location ?location .\n?location locn:address ?address .\n?address locn:fullAddress ?fullAddress\n}\nORDER BY \n?time\nLIMIT 100',
+            vis: "loc"
         },
+
+          {
+            title: 'Doing something useful',
+            text: 'This is useful if we know exactly when an incident was, but what if we want to know about all the incidents since a time.\n For this we can use thr FILTER. Take a look at this example\n FILTER (?time < "2014-06-02T01:37") tells us to take the incidents since the 02/02/2014 at 01:37',
+            code: 'PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX fire: <http://vocab.resc.info/incident#>\nPREFIX locn: <http://www.w3.org/ns/locn#>\nPREFIX spatial: <http://data.ordnancesurvey.co.uk/ontology/spatialrelations/>\nSELECT ?fullAddress ?time\nWHERE {?incident rdf:type fire:IncidentRecord ;\nfire:incidentRecordStartTimestamp ?time ;\nlocn:location ?location .\n?location locn:address ?address .\n?address locn:fullAddress ?fullAddress\n FILTER (?time < "2014-06-02T01:37")\n}\nORDER BY \n?time\nLIMIT 100',
+            vis: "loc"
+        },
+           {
+            title: 'Going forward',
+            text: 'Take a look at the next 3 queries of increasing complexity. the should build on what you know. Take time to fiddle with, and feel free to refer back to previous examles!',
+            code: 'Good Luck!'
+            
+        },
+
         {
             title: 'Locations (plotted on a heat map)',
             text: 'This query will return everything with a location as defined by the LOCN (http://www.w3.org/ns/locn#) ontology. Obviousy, this will be a lot of stuff, so we can use the LIMIT statement followed by a number to limit the number of results that are returned.\n Also notice the DISTINCT statement at the top. This tells sparql that we do not want to select duplicates.',
@@ -170,7 +215,7 @@
     function drawResultsTable(results){
         var resultBox = document.getElementById('result');
         resultBox.innerHTML = "";
-        tableString = '<table class="table"><thead><tr>';
+        tableString = '<div class="table-responsive"><table class="table"><thead><tr>';
         var headingsArray = results.head.vars;
         nCols = results.head.vars.length;
         nRows = results.results.bindings.length;
@@ -185,7 +230,7 @@
                 }
             tableString += '</tr>'
         }
-        tableString += '</table>';
+        tableString += '</table><div>';
         resultBox.innerHTML = tableString;
     }
 	
@@ -293,9 +338,10 @@
        
         } else {
             title.innerHTML = backBtn+' '+"Well done";
-            instruction.innerHTML = "You have completed the introduction, if you have any questions, please contact me at jamesr.gallagher1@gmail.com";
+            instruction.innerHTML = "You have completed the introduction, if you have any questions, please contact me at jamesr.gallagher1@gmail.com.\n Also check out the SPARQL Query Suite - <a href='https://github.com/GMDSP-Linked-Data/PhaseTwo/tree/master/SPARQL%20Query%20Suite'>here</a> for more queries to try.\n You can find out how the visualizations work <a href='https://github.com/GMDSP-Linked-Data/PhaseTwo/tree/master/Visualisations'>here</a>";
             var editor = ace.edit("code");
             editor.getSession().setValue('Well done :)');
+            $('#next').remove()
         }
     }
 </script>
@@ -345,7 +391,7 @@
                             <div id="instructionText" class="panel-body">
                             </div>
                         </div>
-                        <button onclick="showNextInstruction()" type="button" class="btn btn-success btn-lg btn-block">Next...</button>
+                        <button  id = "next"onclick="showNextInstruction()" type="button" class="btn btn-success btn-lg btn-block">Next...</button>
                     </div>
                     <div class="col-md-8 column">
                         <div class="panel panel-default">
