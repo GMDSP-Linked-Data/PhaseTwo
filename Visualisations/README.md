@@ -34,7 +34,7 @@ Create a div that can be used to contain the map;
 <div id="map-canvas"></div>
 ```
 
-Utilise a query such as this to find the locations of certain object;
+Utilise a query such as this to find the locations of certain objects;
 ```sparql
 PREFIX light: <http://data.gmdsp.org.uk/def/council/streetlighting/>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
@@ -58,3 +58,82 @@ Finally initialise the map and hand the JSON object returned from this query to 
 var map = initMap('map-canvas');
 locVis(data, map);
 ```
+
+### Heatmap Visualisation
+This visualisation uses [Google Map API](https://developers.google.com/maps/) to plot a heat map based on a series of points.
+
+To use include the [Google Map API](https://developers.google.com/maps/) with the heatmap visualisation as well as [JSCoord](http://www.jstott.me.uk/jscoord/) and js/mapVis.js;
+```html
+<script src="https://maps.googleapis.com/maps/api/js?libraries=visualization&sensor=true_or_false"></script>
+<script src="js/jscoord.js"></script>
+<script src="js/mapVis.js"></script>
+```
+
+Create a div that can be used to contain the map;
+```html
+<div id="map-canvas"></div>
+```
+
+Query for a set of points;
+```sparql
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> "
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX fire: <http://data.gmdsp.org.uk/def/fire-and-rescue/>
+PREFIX spatial: <http://data.ordnancesurvey.co.uk/ontology/spatialrelations/>
+SELECT ?northing ?easting
+WHERE {
+	?incident rdf:type fire:Incident ;
+		fire:incidentLocation ?location .
+	?location spatial:northing ?northing ;
+		spatial:easting ?easting
+}
+```
+
+Finally initialise the map and hand the JSON object returned from this query to the heatVis() method;
+```javascript
+var map = initMap('map-canvas');
+heatVis(data, map);
+```
+
+### Chart Visualisation
+This visualisation uses [ChartJS](http://www.chartjs.org/) to visualise data as a pie chart.
+
+To use include [ChartJS](http://www.chartjs.org/) and js/chartVis.js in your page;
+```html
+<script src="js/chart.js"></script>
+<script src="jschartVis.js"></script>
+```
+
+Create a canvas to place the chart in;
+```html
+<canvas id="chart-canvas" width="400" height="400"></canvas>
+```
+
+Query for some data - note the visualisation expects the properties "label" and "count" to be present to visualise the data;
+```
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX lib: <http://data.gmdsp.org.uk/data/manchester/libraries/stats/prop/>
+PREFIX stat: <http://statistics.data.gov.uk/doc/statistical-geography/>
+
+SELECT ?label (SUM(?loanCount) AS ?count)
+WHERE{
+	?obv lib:category ?category ;
+		lib:count ?loanCount .
+	?category rdfs:label ?label
+}
+GROUP BY ?label
+ORDER BY DESC(?count)
+```
+
+Finally retrieve the canvas using getCanvas() then call chartVis() handing it the data and the canvas;
+```javascript
+var chart = getCanvas('chart-canvas');
+chartVis(data, chart);
+```
+
+### Licensing
+When making use of any of these visualisations please ensure you include the appropriate licensing file for the utilised libraries;
+[JQuery](http://jquery.com/)
+[Google Map API](https://developers.google.com/maps/)
+[JSCoord](http://www.jstott.me.uk/jscoord/)
+[ChartJS](http://www.chartjs.org/)
