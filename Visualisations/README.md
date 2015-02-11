@@ -142,7 +142,7 @@ chartVis(data, chart);
 
 The results should look something like this;
 
-![alt text](https://github.com/GMDSP-Linked-Data/PhaseTwo/blob/master/Visualisations/img/pichart.png "Chart Visualisation")
+![alt text](https://github.com/GMDSP-Linked-Data/PhaseTwo/blob/master/Visualisations/img/piechart.png "Chart Visualisation")
 
 
 ### Licensing
