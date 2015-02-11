@@ -6,7 +6,7 @@ This document covers how to create some basic visualisations using GMDSP data. A
 ### Querying the data
 Details of how to query the data store using javascript can be found [here](http://data.gmdsp.org.uk/docs#json-p).
 
-e.g. utilising [JQuery](http://jquery.com/)
+e.g. utilising [JQuery](http://jquery.com/);
 ```javascript
 queryUrl = 'http://data.gmdsp.org.uk/sparql.json?query=SELECT+%2A+WHERE+%7B%3Fs+%3Fp+%3Fo%7D+LIMIT+10'
 
@@ -60,6 +60,10 @@ var map = initMap('map-canvas');
 locVis(data, map);
 ```
 
+The results should look something like this;
+
+![alt text](https://github.com/GMDSP-Linked-Data/PhaseTwo/blob/master/Visualisations/img/location.png "Location Visualisation")
+
 ### Heatmap Visualisation
 This visualisation uses [Google Map API](https://developers.google.com/maps/) to plot a heat map based on a series of points.
 
@@ -96,6 +100,10 @@ var map = initMap('map-canvas');
 heatVis(data, map);
 ```
 
+The results should look something like this;
+
+![alt text](https://github.com/GMDSP-Linked-Data/PhaseTwo/blob/master/Visualisations/img/heatmap.png "Heatmap Visualisation")
+
 ### Chart Visualisation
 This visualisation uses [ChartJS](http://www.chartjs.org/) to visualise data as a pie chart.
 
@@ -111,7 +119,7 @@ Create a canvas to place the chart in;
 ```
 
 Query for some data - note the visualisation expects the properties "label" and "count" to be present to visualise the data;
-```
+```sparql
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX lib: <http://data.gmdsp.org.uk/data/manchester/libraries/stats/prop/>
 PREFIX stat: <http://statistics.data.gov.uk/doc/statistical-geography/>
@@ -131,6 +139,11 @@ Finally retrieve the canvas using getCanvas() then call chartVis() handing it th
 var chart = getCanvas('chart-canvas');
 chartVis(data, chart);
 ```
+
+The results should look something like this;
+
+![alt text](https://github.com/GMDSP-Linked-Data/PhaseTwo/blob/master/Visualisations/img/pichart.png "Chart Visualisation")
+
 
 ### Licensing
 When making use of any of these visualisations please ensure you include the appropriate licensing file for the utilised libraries;
