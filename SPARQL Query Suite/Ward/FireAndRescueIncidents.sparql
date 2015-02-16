@@ -1,0 +1,22 @@
+#Find the wards with most incidents in 2014-2015
+
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX fire: <http://vocab.resc.info/incident#>
+PREFIX locn: <http://www.w3.org/ns/locn#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+
+SELECT ?wardName (COUNT (?incident) AS ?numberOfIncidents)
+WHERE {
+	?incident rdf:type fire:IncidentRecord ;
+		locn:location ?location ;
+		fire:incidentRecordStartTimestamp ?time .
+	?location locn:address ?address .
+	?address locn:addressArea ?ward .
+	?ward rdfs:label ?wardName .
+	FILTER (?time >= "2014-01-01T00:00" && ?time <= "2015-01-01T00:00")
+	?area owl:sameAs ?ward
+} 
+GROUP BY ?wardName 
+ORDER BY DESC(?numberOfIncidents)
+LIMIT 10

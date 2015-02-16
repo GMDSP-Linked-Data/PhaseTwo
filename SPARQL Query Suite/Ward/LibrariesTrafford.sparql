@@ -1,0 +1,22 @@
+#Retrieve library loan statistics for a specific ward in 2014-2015/H1.
+#Hale Barns - odc:E05000830
+#Hale Central - odc:E05000831
+#Timperley - odc:E05000837
+#Some loan stats contain a total observation - the filter removes this from the results.
+
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX lib: <http://data.gmdsp.org.uk/data/trafford/libraries/stats/prop/>
+PREFIX stat: <http://statistics.data.gov.uk/doc/statistical-geography/>
+PREFIX odc: <http://opendatacommunities.org/doc/geography/administration/wd/>
+PREFIX tff: <http://reference.data.gov.uk/id/government-half/2014-15/>
+
+SELECT ?categoryLabel ?loanCount
+WHERE{
+	?obv lib:category ?category ;
+		lib:area odc:E05000837 ;
+		lib:period tff:H1 ;
+		lib:count ?loanCount .
+	?category rdfs:label ?categoryLabel .
+	FILTER regex(?categoryLabel, "^((?!total).)*$", "i")
+}
+ORDER BY DESC(?count)

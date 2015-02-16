@@ -1,0 +1,20 @@
+#Find the wards with the fewest completed safety checks in 2013-2014
+
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX hscprop: <http://data.gmdsp.org.uk/data/fire-and-rescue/stats/hsc/prop/>
+PREFIX year: <http://reference.data.gov.uk/doc/government-year/>
+PREFIX qb: <http://purl.org/linked-data/cube#>
+PREFIX hsctype: <http://data.gmdsp.org.uk/def/fire-and-rescue/hsc-type/>
+
+SELECT DISTINCT ?areaLabel ?count
+WHERE {
+	?obv rdf:type qb:Observation ;
+		hscprop:category hsctype:completed ;
+		hscprop:period year:2013-2014 ;
+		hscprop:count ?count ;
+		hscprop:area ?area .
+	?area rdfs:label ?areaLabel
+}
+ORDER BY ?count
+LIMIT 10

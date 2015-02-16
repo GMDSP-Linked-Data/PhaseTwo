@@ -1,0 +1,22 @@
+#Retrieve library loan statistics for a specific ward in December 2014.
+#Gorton North - odc:E05000702
+#Gorton South - odc:E05000703
+#Levenshulme - odc:E05000707
+#Some loan stats contain a total observation - the filter removes this from the results.
+
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX lib: <http://data.gmdsp.org.uk/data/manchester/libraries/stats/prop/>
+PREFIX stat: <http://statistics.data.gov.uk/doc/statistical-geography/>
+PREFIX odc: <http://opendatacommunities.org/doc/geography/administration/wd/>
+PREFIX month: <http://reference.data.gov.uk/id/month/>
+
+SELECT ?categoryLabel ?loanCount
+WHERE{
+	?obv lib:category ?category ;
+		lib:area odc:E05000702 ;
+		lib:period month:2014-12 ;
+		lib:count ?loanCount .
+	?category rdfs:label ?categoryLabel .
+	FILTER regex(?categoryLabel, "^((?!total).)*$", "i")
+}
+ORDER BY DESC(?count)
