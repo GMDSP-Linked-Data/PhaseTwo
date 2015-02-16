@@ -6,7 +6,6 @@
 
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX lib: <http://data.gmdsp.org.uk/data/manchester/libraries/stats/prop/>
-PREFIX stat: <http://statistics.data.gov.uk/doc/statistical-geography/>
 PREFIX odc: <http://opendatacommunities.org/doc/geography/administration/wd/>
 PREFIX month: <http://reference.data.gov.uk/id/month/>
 
@@ -19,4 +18,4 @@ WHERE{
 	?category rdfs:label ?categoryLabel .
 	FILTER regex(?categoryLabel, "^((?!total).)*$", "i")
 }
-ORDER BY DESC(?count)
+ORDER BY DESC(?loanCount)
