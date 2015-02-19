@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<link href='http://fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet' type='text/css'>
+<style>
+.header{
+    font-family: 'Varela Round', sans-serif;
+    color:rgb(150,150,150);
+    font-size: 1.3em;
+    text-align:justify;
+}
+#map-canvas{
+    width:100%;
+    height:400px;
+    margin-bottom: 30px;
+}
+
+.fix-height{
+    min-height:322px;
+}
+.logo{
+    width:200px;
+    margin:10px;
+}
+
+.table-responsive{
+    overflow: scroll;
+}
+
+
+</style>
+<script>
+  
+
+    var baseURL = "http://data.gmdsp.org.uk/sparql.json??utf8=%E2%9C%93&query=";
+    var backBtn = '<button onclick = "showPreviousInstruction()" type="button" class="btn btn-default btn-sml"><span class="glyphicon glyphicon-circle-arrow-left" aria-hidden="true"></span></button>';
+	var map;
+	var chart;
+
+
+
+    //give it a html element and it'll append a spinner
+    function showSpinner(el){
+        var spinner = '<img class="img-responsive center-block" src="img/spinner.gif"></img>';
+        el.append(spinner)
+    }
+
+    function drawResultsTable(results){
+        var resultBox = document.getElementById('result');
+        resultBox.innerHTML = "";
+        tableString = '<div class="table-responsive"><table class="table"><thead><tr>';
+        var headingsArray = results.head.vars;
+        nCols = results.head.vars.length;
+        nRows = results.results.bindings.length;
+        for(i=0;i<nCols;i++){
+            tableString += '<th>'+headingsArray[i]+'</th>'
+        }
+        tableString += '</tr></thead>';
+        for(x=0;(x<nRows && x<100);x++){
+            tableString += '<tr>';
+                for(var propertyName in results.results.bindings[x]) {
+                    tableString += '<td>'+results.results.bindings[x][propertyName].value+'</td>';
+                }
+            tableString += '</tr>'
+        }
+        tableString += '</table><div>';
+        resultBox.innerHTML = tableString;
+    }
+	
+	function clearVisualisation(){
+		var visDiv = document.getElementById('visDiv');
+		visDiv.innerHTML = "";
+	}
+	
+	function prepVisualisation(){
+		
+			var e = document.getElementById("visDrop");
+            var vis = e.options[e.selectedIndex].value;
+			if(vis == "loc" || vis == "heat"){
+				visDiv.innerHTML = '<div id="map-canvas"></div>';
+				map = initMap('map-canvas');
+			} else if(vis == "pie"){
+				visDiv.innerHTML = '<canvas id="chart-canvas" width="400" height="400"></canvas>';
+				chart = getCanvas('chart-canvas');
+			}
+		
+	}
+	
+	function drawVisualisation(data){
+		prepVisualisation();
+		
+			var e = document.getElementById("visDrop");
+            var vis = e.options[e.selectedIndex].value;
+            console.log(vis)
+			if(vis == "loc"){
+				locVis(data, map);
+			} else if(vis == "heat"){
+				heatVis(data, map);
+			} else if(vis == "pie"){
+				chartVis(data, chart);
+			}
+		
+	}
+
+    function runCode() {
+        prepVisualisation();
+        var resultBox = document.getElementById('resultsDiv');
+        resultBox.innerHTML =  '<div class="panel panel-default"><div class="panel-heading"><h3 class="panel-title">The Result</h3></div> <div id="result" class="panel-body"></div></div>';
+
+        showSpinner($('#result'))
+        var query = ace.edit("code").getSession().getValue();
+        var encodedQuery = encodeURIComponent(query);
+        var requestURL = baseURL + encodedQuery;
+        $.ajax({
+            url: requestURL,
+            success: function(data) {
+                console.log(data)
+                var map = window.map;
+                drawResultsTable(data);
+				drawVisualisation(data);
+            },
+            error: function(data) {
+                document.getElementById('visDiv').innerHTML = JSON.stringify(data, null, 4);
+                resultBox.innerHTML = "";
+            }
+        });
+    }
+
+  
+
+    function drawInstructions(){
+
+
+    
+            
+			clearVisualisation();
+			
+            var editor = ace.edit("code");
+            editor.setTheme("ace/theme/monokai");
+            editor.resize()
+            editor.getSession().setUseWrapMode(true);
+            editor.getSession().setMode("ace/mode/sql");
+     
+    }
+</script>
+
+<head>
+    <meta charset="utf-8">
+    <title>GMDSP Sparql Walkthrough</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <!-- Fav and touch icons -->
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="img/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="img/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="img/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="img/apple-touch-icon-57-precomposed.png">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/4.8.0/codemirror.min.css">
+
+    <link rel="shortcut icon" href="img/favicon.png">
+    <script src="https://maps.googleapis.com/maps/api/js?libraries=visualization&sensor=true_or_false"></script>
+    <script src="js/mapVis.js"></script>
+    <script src="js/jscoord.js"></script>
+    <script src="js/chart.js"></script>
+    <script src="js/chartVis.js"></script>
+
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.1.3/ace.js">
+    </script>
+</head>
+
+<body onload="drawInstructions()">
+
+    <br>
+    <div class="container">
+
+        <p class="header">
+            <p class=" header text-left"><img class="logo align-left"src="img/GMDSP_Logo_Full_text_RGB1.png"></img> Generic Query Page </p>
+            <p class=" text-left"><a href="http://gmdsp.org.uk"> Back To Main Page</a><a href="index.html" style="margin-left:30px;">Sparql Walkthrough</a><a href="https://github.com/GMDSP-Linked-Data/PhaseTwo/tree/master/SPARQLQuerySuite" style="margin-left:30px;">Sparql Query Suite</a></p>
+        </p>
+         
+
+
+        <div class="row clearfix">
+            <div class="col-md-12 column">
+                <div class="row clearfix">
+                    <div class="col-md-6 column">
+                        <div style="min-height:322px;" class="panel-body" id="code">
+                                
+                        </div>
+                         <span id="runBtnHolder">
+                            <br>
+                            <select  class="form-control" id="visDrop">
+                                <option value ="loc">Plot on map</option>
+                                <option value ="heat">Heatmap</option>
+                                <option value ="pie">Pie Chart</option>
+                                
+                            </select>
+                            <br>
+                             
+                        <button onclick="runCode()" type="button" class="btn btn-warning btn-lg btn-block">Run</button>
+                        </span>
+                    </div>
+               <div class="col-md-6 column">
+                   <div id="visDiv" style="background-color:lightgrey; min-height:320px">
+
+                       
+                   </div>
+                </div>
+                </div>
+                <br>
+                 <div id="resultsDiv" ></div>
+                 <div class="col-md-12 column">
+                    <br>
+                <div class="row clearfix">
+                    <div class="col-md-12 column fix-height">
+                        <div class="panel panel-default fix-height ">
+                            <div class="panel-heading">
+                            <h3 id="instructionTitle" class="panel-title">
+                                How to use.
+                            </h3>
+                            </div>
+                            <div id="instructionText" class="panel-body" >
+                                To use this generic query page, enter your SPARQL query into the editor on the left. You can then use the drop-down box to choose which visualisation you would like to generate. <br><br> For a map based visualisation, be sure to return a Latitude and or Longitude (or Northing and Easting). <br><br>
+                                For a chart based visualisation, please return a label and a count.
+                                <br><br>
+                                For examples of queries to use, please take a look at the <a href="https://github.com/GMDSP-Linked-Data/PhaseTwo/tree/master/SPARQLQuerySuite">SPARQL query suite</a> and the <a href="/index.html"> SPARQL walkthough</a>
+                                <br><br>
+                                For the full visualisation documentation, please visit <a href="https://github.com/GMDSP-Linked-Data/PhaseTwo/tree/master/Visualisations"> this documentation page</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+
+            
+        
+               
+            </div>
+    </body>
+</html>
+
+
+
