@@ -35,6 +35,8 @@ Create a div that can be used to contain the map;
 <div id="map-canvas"></div>
 ```
 
+Note that this div will still have zero height after the map is created. In order to see anything, you will need to set the div height in CSS.
+
 Utilise a query such as this to find the locations of certain objects;
 ```sparql
 PREFIX light: <http://data.gmdsp.org.uk/def/council/streetlighting/>
