@@ -6,10 +6,12 @@ function visChart(data, canvas) {
     };
     var results = data.results.bindings;
     for (i = 0; i < results.length; i++) {
-        var unit = results[i].label.value;
-        var amount = parseFloat(results[i].count.value);
-        var col = getRandomColor();
-        chartData.push({value: amount, label: unit, color: col});
+	if (Object.keys(results[i]).length > 0){
+            var unit = results[i].unitLabel.value;
+	    var amount = parseFloat(results[i].total.value);
+            var col = getRandomColor();
+            chartData.push({value: amount, label: unit, color: col});
+	}
     }
     new Chart(canvas).Doughnut(chartData, pieOptions);
 }
